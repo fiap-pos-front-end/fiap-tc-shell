@@ -1,5 +1,6 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
+import { ReactWrapperComponent } from './react-wrapper/react-wrapper.component';
 
 export const routes: Routes = [
   {
@@ -10,5 +11,9 @@ export const routes: Routes = [
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
         exposedModule: './routes',
       }).then((m) => m.routes),
+  },
+  {
+    path: 'react',
+    component: ReactWrapperComponent,
   },
 ];
