@@ -1,13 +1,15 @@
-<ul>
-  <li>
-    <a [routerLink]="['/angular']">Angular</a>
-  </li>
-  <li>
-    <a [routerLink]="['/angular/home2']">Angular2</a>
-  </li>
-  <li>
-    <a [routerLink]="['/react']">React</a>
-  </li>
-</ul>
+<h1>Shell</h1>
+<p-menubar [model]="items">
+  <ng-template #item let-item>
+    <ng-container>
+      <a [routerLink]="item.route" class="p-menubar-item-link">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-container>
+  </ng-template>
+</p-menubar>
+
+<hr />
 
 <router-outlet />
