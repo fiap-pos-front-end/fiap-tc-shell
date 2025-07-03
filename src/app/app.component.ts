@@ -5,9 +5,8 @@ import { MenubarComponent } from '@shell/core';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, MenubarComponent],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   title = 'fiap-tc-shell';
-
 }
