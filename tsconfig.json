@@ -17,7 +17,7 @@
     "module": "ES2022",
     "paths": {
       "@shell/core": ["./src/app/core/index.ts"]
-    },
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
