@@ -1,6 +1,6 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
-import { ReactWrapperComponent } from './react-wrapper/react-wrapper.component';
+import { ReactWrapperComponent } from '@shell/core';
 
 export const routes: Routes = [
   {
