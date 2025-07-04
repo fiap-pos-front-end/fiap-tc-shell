@@ -1,0 +1,37 @@
+# Dockerfile (na raiz)
+
+# Builder para o fiap-tc-shell
+FROM node:lts-alpine AS builder-fiap-tc-shell
+WORKDIR /fiap-tc-shell
+COPY fiap-tc-shell/package.json fiap-tc-shell/package-lock.json ./
+RUN npm ci --silent
+COPY fiap-tc-shell/ .
+RUN npm run build --prod
+
+# Builder para o fiap-tc-angular
+FROM node:lts-alpine AS builder-fiap-tc-angular
+WORKDIR /fiap-tc-angular
+COPY fiap-tc-angular/package.json fiap-tc-angular/package-lock.json ./
+RUN npm ci --silent
+COPY fiap-tc-angular/ .
+RUN npm run build --prod
+
+# Builder para o Remote React
+FROM node:lts-alpine AS builder-fiap-tc-react
+WORKDIR /fiap-tc-react
+COPY fiap-tc-react/package.json fiap-tc-react/package-lock.json ./
+RUN npm ci --silent
+COPY fiap-tc-react/ .
+RUN npm run build
+
+# Stágio final: Nginx único
+FROM nginx:stable-alpine
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/
+
+COPY --from=builder-fiap-tc-shell   /fiap-tc-shell/dist/<fiap-tc-shell-app-name>         /usr/share/nginx/html/fiap-tc-shell
+COPY --from=builder-fiap-tc-angular      /fiap-tc-angular/dist/<fiap-tc-angular-app-name>  /usr/share/nginx/html/fiap-tc-angular
+COPY --from=builder-fiap-tc-react   /fiap-tc-react/build                         /usr/share/nginx/html/fiap-tc-react
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
