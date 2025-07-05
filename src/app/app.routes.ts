@@ -1,6 +1,7 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
 import { ReactWrapperComponent } from '@shell/core';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
   {
@@ -8,7 +9,7 @@ export const routes: Routes = [
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost/fiap-tc-angular/remoteEntry.js',
+        remoteEntry: environment.urlMfAngular,
         exposedModule: './routes',
       }).then((m) => m.routes),
   },
