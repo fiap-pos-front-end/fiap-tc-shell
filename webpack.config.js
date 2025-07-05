@@ -4,7 +4,8 @@ module.exports = withModuleFederationPlugin({
   name: "fiap-tc-shell",
 
   remotes: {
-    "fiap-tc-angular": "fiap-tc-angular@http://localhost:4201/remoteEntry.js",
+    // "fiap-tc-angular": "fiap-tc-angular@http://localhost:4201/remoteEntry.js",
+    'fiap-tc-angular': 'fiap-tc-angular@/fiap-tc-angular/remoteEntry.js',
   },
 
   shared: {

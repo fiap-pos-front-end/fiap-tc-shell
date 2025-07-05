@@ -9,7 +9,7 @@ export class ReactWrapperComponent {
   async ngAfterViewInit() {
     const remoteModule = await loadRemoteModule({
       type: 'module',
-      remoteEntry: 'http://localhost:4300/remoteEntry.js',
+      remoteEntry: 'http://localhost/fiap-tc-react/remoteEntry.js',
       exposedModule: './mount',
     });
 

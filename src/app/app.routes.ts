@@ -8,7 +8,7 @@ export const routes: Routes = [
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        remoteEntry: 'http://localhost/fiap-tc-angular/remoteEntry.js',
         exposedModule: './routes',
       }).then((m) => m.routes),
   },
