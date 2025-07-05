@@ -9,7 +9,10 @@
     "start": "ng serve --port 4200",
     "start:fiap-tc-react": "cd ../fiap-tc-react && npm start",
     "start:fiap-tc-angular": "cd ../fiap-tc-angular && npm start",
+    "install:fiap-tc-react": "cd ../fiap-tc-react && npm i",
+    "install:fiap-tc-angular": "cd ../fiap-tc-angular && npm i",
     "start:all": "concurrently \"npm run start:fiap-tc-react\" \"npm run start:fiap-tc-angular\" \"npm run start\"",
+    "install:all": "concurrently \"npm run install:fiap-tc-react\" \"npm run install:fiap-tc-angular\" \"npm i\"",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
