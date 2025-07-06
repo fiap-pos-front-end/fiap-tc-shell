@@ -4,6 +4,7 @@ import { ReactWrapperComponent } from '@shell/core';
 import { environment } from '../environments/environment';
 
 export const routes: Routes = [
+  // TODO: De alguma forma, acho que precisamos deixar esse path "limpo" para que o remote Angular não precise "conhecer" o path do shell para que os redirects funcionem.
   {
     path: 'angular',
     loadChildren: () =>
