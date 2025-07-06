@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class MenubarComponent {
   readonly menus: MenuItem[] = [
     { label: 'Início' },
-    { label: 'Transferências' },
+    { label: 'Transferências', routerLink: '/angular/transferencias' },
     {
       label: 'Rotas',
       icon: 'pi pi-map',
