@@ -1,1 +1,14 @@
-<p-menubar [model]="menus" />
+<p-menubar [model]="menus" class="bg-blue-600">
+  <!-- Note: se desejarmos adicionar um logo, por exemplo, basta usar ng-template #start (https://primeng.org/menubar) -->
+
+  <ng-template #item let-item>
+    <a pRipple [routerLink]="item.routerLink" class="flex items-center p-menubar-item-link">
+      <span>{{ item.label }}</span>
+      <i *ngIf="item.items" class="ml-auto pi pi-angle-down"></i>
+    </a>
+  </ng-template>
+
+  <ng-template #end>
+    <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+  </ng-template>
+</p-menubar>
