@@ -13,27 +13,9 @@ import { CommonModule } from '@angular/common';
 })
 export class MenubarComponent {
   readonly menus: MenuItem[] = [
-    { label: 'Início' },
+    { label: 'Início', routerLink: '' },
     { label: 'Categorias' },
-    { label: 'Transferências' },
+    { label: 'Transferências', routerLink: '/angular' },
     { label: 'Investimentos' },
-    {
-      label: 'Rotas',
-      icon: 'pi pi-map',
-      items: [
-        {
-          label: 'Angular',
-          routerLink: '/angular',
-        },
-        {
-          label: 'Angular 2',
-          routerLink: '/angular/home2',
-        },
-        {
-          label: 'React',
-          routerLink: '/react',
-        },
-      ],
-    },
   ];
 }
