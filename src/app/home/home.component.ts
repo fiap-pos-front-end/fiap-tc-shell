@@ -1,7 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactWrapperComponent } from '@shell/core';
-import { getLastEvent, onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
+import { onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 
 @Component({
   selector: 'app-home',
