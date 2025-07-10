@@ -1,4 +1,4 @@
-<p-menubar [model]="menus" class="bg-blue-600">
+<p-menubar [model]="menus">
   <ng-template #item let-item>
     <a pRipple [routerLink]="item.routerLink" class="flex items-center p-menubar-item-link">
       <span>{{ item.label }}</span>
