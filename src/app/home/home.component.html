@@ -1,0 +1,37 @@
+<div class="flex flex-col md:flex-row">
+  <div class="md:w-8/12 lg:w-8/12 w-full flex flex-col">
+    <div class="p-2 flex-none">
+      <div class="w-full rounded-lg shadow p-4 bg-sky-200">
+        <div class="flex justify-between items-start">
+          <h1 class="text-xl font-semibold">Olá, {{ user }}!</h1>
+          <span class="text-sm">{{ dateToday | date: "dd/MM/yyyy" }}</span>
+        </div>
+        <div class="mt-6">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs uppercase">Saldo</span>
+            <button (click)="toggleVisibility = !toggleVisibility" aria-label="Toggle saldo">
+              <i [ngClass]="toggleVisibility ? 'pi pi-eye' : 'pi pi-eye-slash'"></i>
+            </button>
+          </div>
+          <h2 class="mt-2 text-3xl font-bold">
+            {{ toggleVisibility ? (balance | currency: "BRL" : "symbol" : "1.2-2") : "••••••••••••" }}
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-2 flex-1 overflow-auto">
+      <div class="w-full h-full rounded-lg shadow p-4 flex flex-col bg-slate-100">
+        <h2 class="text-xl font-semibold mb-4">Resumo</h2>
+        <app-react-wrapper />
+      </div>
+    </div>
+  </div>
+
+  <aside class="md:w-4/12 lg:w-4/12 w-full p-2 flex flex-col overflow-auto">
+    <div class="w-full rounded-lg shadow p-4 flex flex-1 bg-slate-100">
+      <h2 class="text-xl font-semibold mb-4">Extrato</h2>
+      <div class="space-y-6 flex-1 overflow-auto"></div>
+    </div>
+  </aside>
+</div>
