@@ -10,11 +10,20 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'angular',
+    path: 'transacoes',
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: environment.urlMfAngular,
+        exposedModule: './routes',
+      }).then((m) => m.routes),
+  },
+  {
+    path: 'categorias',
+    loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: environment.urlMfAngular2,
         exposedModule: './routes',
       }).then((m) => m.routes),
   },
