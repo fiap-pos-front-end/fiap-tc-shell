@@ -1,18 +1,42 @@
-<p-menubar [model]="menus">
-  <ng-template #item let-item>
-    <a pRipple [routerLink]="item.routerLink" class="flex items-center p-menubar-item-link">
-      <span>{{ item.label }}</span>
-      <i *ngIf="item.items" class="ml-auto pi pi-angle-down"></i>
-    </a>
-  </ng-template>
+<div class="mx-auto max-w-7xl">
+  <p-menubar [model]="menus">
+    <ng-template #start>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 5 5"
+        preserveAspectRatio="xMidYMid meet"
+        class="m-2"
+      >
+        <rect width="5" height="5" fill="none" />
+        <rect x="0" y="0" width="1" height="1" fill="#4CAF50" />
+        <rect x="3" y="0" width="1" height="1" fill="#4CAF50" />
+        <rect x="1" y="1" width="2" height="1" fill="#4CAF50" />
+        <rect x="1" y="2" width="2" height="1" fill="#4CAF50" />
+        <rect x="0" y="3" width="2" height="1" fill="#4CAF50" />
+      </svg>
+    </ng-template>
+    <ng-template #item let-item>
+      <a pRipple [routerLink]="item.routerLink" class="flex items-center p-menubar-item-link">
+        <span><i [class]="item.icon + ' mr-2'"></i> {{ item.label }}</span>
+        <i *ngIf="item.items" class="ml-auto pi pi-angle-down"></i>
+      </a>
+    </ng-template>
 
-  <ng-template #end>
-    <div class="flex items-center space-x-3">
-      <p-floatlabel variant="on">
-        <input pInputText id="over_label" [(ngModel)]="jwtToken" autocomplete="off" class="h-8" />
-        <label for="over_label">Token JWT</label>
-      </p-floatlabel>
-      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle"></p-avatar>
-    </div>
-  </ng-template>
-</p-menubar>
+    <ng-template #end>
+      <div class="flex items-center space-x-3">
+        <p-floatlabel variant="on">
+          <input pInputText id="over_label" [(ngModel)]="jwtToken" autocomplete="off" class="h-8" />
+          <label for="over_label">Token JWT</label>
+        </p-floatlabel>
+        <p-avatar
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          shape="circle"
+          (click)="logout.toggle($event)"
+        ></p-avatar>
+        <p-menu #logout [model]="logoutMenu" [popup]="true" />
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
