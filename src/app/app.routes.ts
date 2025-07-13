@@ -4,7 +4,6 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-  // TODO: De alguma forma, acho que precisamos deixar esse path "limpo" para que o remote Angular não precise "conhecer" o path do shell para que os redirects funcionem.
   {
     path: '',
     component: HomeComponent,
@@ -15,6 +14,15 @@ export const routes: Routes = [
       loadRemoteModule({
         type: 'module',
         remoteEntry: environment.urlMfAngular,
+        exposedModule: './routes',
+      }).then((m) => m.routes),
+  },
+  {
+    path: 'categorias',
+    loadChildren: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: environment.urlMfAngular2,
         exposedModule: './routes',
       }).then((m) => m.routes),
   },
