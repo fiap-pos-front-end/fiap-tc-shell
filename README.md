@@ -1,59 +1,64 @@
-# FiapTcShell
+# Fiap Tech Challenge Shell
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+Projeto shell para Microfrontends Fiap Tech Challenge. Reúne front-ends React (Charts), Angular (Transações), Angular2 (Categorias) e API.
 
-## Development server
+## Pré-requisitos
 
-To start a local development server, run:
+- Node.js >= 18
+- Angular CLI >= 15
 
-```bash
-ng serve
-```
+## Estrutura do Repositório
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **/src**: Código do shell Angular
 
-## Code scaffolding
+### Repositórios separados
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **../fiap-tc-react**: MFE React
+- **../fiap-tc-angular**: MFE Angular
+- **../fiap-tc-angular2**: MFE Angular2
+- **../fiap-tc-api**: Backend API
 
-```bash
-ng generate component component-name
-```
+## Instalação
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Instala todas as dependências de uma só vez:
 
 ```bash
-ng build
+npm run install:all
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Instale individualmente:
 
 ```bash
-ng test
+npm run install:fiap-tc-react
+npm run install:fiap-tc-angular
+npm run install:fiap-tc-angular2
+npm run install:fiap-tc-api
+npm i
 ```
 
-## Running end-to-end tests
+## Execução
 
-For end-to-end (e2e) testing, run:
+### Inicia apenas o shell Angular:
 
 ```bash
-ng e2e
+npm run start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Inicia todos os serviços (React, Angular, Angular2, API e shell):
 
-## Additional Resources
+```bash
+npm run start:all
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Scripts Úteis
+
+- `npm run build` — Compila o shell Angular para produção
+- `npm run watch` — Compilação em modo observação (dev)
+- `npm run test` — Executa testes
+- `npm run run:all` — Inicializa o servidor de desenvolvimento de MFEs federados
+
+## Observações
+
+- Verifique versões de Node e Angular CLI se algo quebrar.
+- Estrutura de pastas e caminhos são cruciais.
+- Lembre-se de adicionar o token do GitHub no .npmrc para instalar a dependência da organização.
