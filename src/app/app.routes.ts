@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'angular',
+    path: 'transferencias',
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
