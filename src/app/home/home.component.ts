@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   dateToday = new Date();
   toggleVisibility = true;
   balance = 0;
+
   ngOnInit(): void {
     onEvent('balanceChange', (val) => (this.balance = val));
   }
