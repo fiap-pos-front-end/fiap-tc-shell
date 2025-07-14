@@ -1,16 +1,15 @@
-import { Component, effect, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, effect, model } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { emitEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
-import { MenubarModule } from 'primeng/menubar';
-import { MenuModule } from 'primeng/menu';
-import { Ripple } from 'primeng/ripple';
-import { FormsModule } from '@angular/forms';
-import { emitEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { Menu } from 'primeng/menu';
+import { Menu, MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { Ripple } from 'primeng/ripple';
 
 @Component({
   selector: 'app-menubar',
