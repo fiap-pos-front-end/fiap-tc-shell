@@ -1,1 +1,15 @@
-<p>landing-page works!</p>
+<!-- Galeria de Notícias -->
+<div class="w-full flex justify-center items-center">
+    <p-galleria [value]="images" [containerStyle]="{ 'max-width': '720px' }" [showThumbnails]="false" [numVisible]="5" [indicatorsPosition]="'right'" [showIndicators]="true" [autoPlay]="true" [circular]="true">
+        <ng-template #item let-item>
+            <img [src]="item.itemImageSrc" style="width: 100%; height: 100%; display: block;"  />
+        </ng-template>
+        <ng-template #thumbnail let-item>
+            <img [src]="item.thumbnailImageSrc" style="display: block;" />
+        </ng-template>
+        <ng-template #caption let-item>
+            <div class="text-xl mb-2 font-bold">{{ item.title }}</div>
+            <p class="text-white">{{ item.alt }}</p>
+        </ng-template>
+    </p-galleria>
+</div>
