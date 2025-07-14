@@ -29,14 +29,22 @@ import { Menu } from 'primeng/menu';
     FormsModule,
     // FIM TODO
   ],
+  styles: `
+    .p-menuitem-link-active {
+      border-radius: 0.5rem;
+      color: var(--p-menubar-item-focus-color);
+      background: var(--p-menubar-item-focus-background);
+    }
+  `,
 })
 export class MenubarComponent {
   readonly logoutMenu: MenuItem[] = [{ label: 'Sair', routerLink: '', icon: 'pi pi-sign-out' }];
   readonly menus: MenuItem[] = [
-    { label: 'Início', routerLink: '', icon: 'pi pi-home' },
+    { label: 'Início', routerLink: '', icon: 'pi pi-home', routerLinkActiveOptions: { exact: true } },
     { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
     { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
   ];
+
   // TODO: REMOVER
   jwtToken = model('');
   jwtTokenEffect = effect(() => {
