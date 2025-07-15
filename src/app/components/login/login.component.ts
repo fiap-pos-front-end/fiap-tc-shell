@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { setToken } from '../../store/auth/auth.actions';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -19,7 +21,8 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+     private store: Store,
   ) {}
 
   ngOnInit() {
@@ -43,8 +46,11 @@ export class LoginComponent {
         Body: { email: this.loginForm.value.email, password: this.loginForm.value.password }
       }).subscribe({
         next: res => {
-          console.log('Usuário autenticado', res);
-          this.router.navigate(['/home']);
+          const token = res?.result?.token;
+          if (token) {
+            this.store.dispatch(setToken({ token }));
+            this.router.navigate(['/home']);
+          }
         },
         error: err => {
           console.error('Erro ao autenticar:', err);
@@ -60,8 +66,11 @@ export class LoginComponent {
       const user = this.registerForm.value;
       this.loginService.createUser({ Body: user }).subscribe({
         next: res => {
-          console.log('Usuário criado com sucesso:', res);
-          this.router.navigate(['/home']);
+         const token = res?.result?.token;
+          if (token) {
+            this.store.dispatch(setToken({ token }));
+            this.router.navigate(['/home']);
+          }
         },
         error: err => {
           console.error('Erro ao criar usuário:', err);
