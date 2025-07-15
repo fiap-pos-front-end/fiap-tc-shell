@@ -1,3 +1,16 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .wrapper {
     position: relative;
     width: 750px;
@@ -5,7 +18,8 @@
     background: #f7f7f7;
     border: 2px solid #f7f7f7;
     overflow: hidden;
-    //box-shadow: 0 0 25px #f7f7f7;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .wrapper .form-box {
@@ -65,7 +79,7 @@
 
 .form-box h2 {
     font-size: 32px;
-    color: #000;
+    color: #15785A;
     text-align: center;
 }
 
@@ -93,7 +107,6 @@
 .input-box input:focus~label,
 .input-box input:valid~label {
     top: -5px;
-
 }
 
 .input-box label {
@@ -139,13 +152,27 @@
 }
 
 .logreg-link p a {
-    color:#248228;
+    color:#15785A;
     text-decoration: none;
     font-weight: 600;
 }
 
 .logreg-link p a:hover {
     text-decoration: underline;
+}
+
+.btn {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #15785A;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #15785A;
+    font-weight: 600;
 }
 
 .wrapper .info-text {
@@ -203,16 +230,16 @@
 }
 
 .wrapper .bg-animate {
-  position: absolute;
-  top: -4px;
-  right: 0;
-  width: 850px;
-  height: 600px;
-  background: #1f1f1f;
-  transform: rotate(10deg) skewY(40deg);
-  transform-origin: bottom right;
-  transition: 1.5s ease;
-  transition-delay: 1.6s;
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 850px;
+    height: 600px;
+    background: #1f1f1f;
+    transform: rotate(10deg) skewY(40deg);
+    transform-origin: bottom right;
+    transition: 1.5s ease;
+    transition-delay: 1.6s;
 }
 
 .wrapper.active .bg-animate {
@@ -251,4 +278,24 @@
     opacity: 0;
     filter: blur(10px);
     transition-delay: calc(.1s * var(--i));
+}
+
+.close-login{
+    background-color: #15785A;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: #fff; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -10px;
+    cursor: pointer;
+    top: -10px;
+}
+
+.modal{
+    display: flex;
+    align-items: flex-start;
 }

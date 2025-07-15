@@ -11,7 +11,7 @@ export class LandingPageService {
                 itemImageSrc: 'assets/images/image-ByteBank.png',
                 thumbnailImageSrc: 'assets/images/image-ByteBank.png',
                 alt: 'É novo por aqui ? Clique para conferir mais sobre nós',
-                title: 'Conheça o ByteBank'
+                title: 'Conheça o Bytebank'
             },
             {
                 itemImageSrc: 'assets/images/image-newUpdate.png',
@@ -23,7 +23,7 @@ export class LandingPageService {
                 itemImageSrc: 'assets/images/image-app_ByteBank.png',
                 thumbnailImageSrc: 'assets/images/image-app_ByteBank.png',
                 alt: 'Fiquem ligados na próxima etapa de desafios',
-                title: 'ByteBank no seu smartphone?'
+                title: 'Bytebank no seu smartphone?'
             },
             {
                 itemImageSrc: 'assets/images/image-TI_FINANCAS.png',
