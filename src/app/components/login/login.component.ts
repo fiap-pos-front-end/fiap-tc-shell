@@ -69,8 +69,8 @@ export class LoginComponent {
          const token = res?.result?.token;
           if (token) {
             this.store.dispatch(setToken({ token }));
-            this.router.navigate(['/home']);
           }
+          this.router.navigate(['/home']);
         },
         error: err => {
           console.error('Erro ao criar usuário:', err);
