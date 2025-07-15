@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [ReactiveFormsModule],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -18,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private loginService: LoginService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -32,6 +33,8 @@ export class LoginComponent {
       password: ['', Validators.required],
       email:['', Validators.required]
     });
+
+    this.loginService.getUser().subscribe(console.log);
   }
 
   authUser() {
@@ -39,8 +42,13 @@ export class LoginComponent {
       this.loginService.authUser({
         Body: { email: this.loginForm.value.email, password: this.loginForm.value.password }
       }).subscribe({
-        next: data => console.log('Usuário autenticado:', data),
-        error: err => console.error('Erro ao autenticar:', err)
+        next: res => {
+          console.log('Usuário autenticado', res);
+          this.router.navigate(['/home']);
+        },
+        error: err => {
+          console.error('Erro ao autenticar:', err);
+        }
       });
     } else {
       console.log('Formulário inválido');
@@ -48,11 +56,20 @@ export class LoginComponent {
   }
 
   createUser() {
-    this.loginService.createUser({ Body: 
-        {   "username": "teste 2",
-            "email": "teste@gmail.com",
-            "password": "testes",
-        }});
+    if (this.registerForm.valid) {
+      const user = this.registerForm.value;
+      this.loginService.createUser({ Body: user }).subscribe({
+        next: res => {
+          console.log('Usuário criado com sucesso:', res);
+          this.router.navigate(['/home']);
+        },
+        error: err => {
+          console.error('Erro ao criar usuário:', err);
+        }
+      });
+    } else {
+      console.warn('Formulário inválido!');
+    }
   }
 
   changeMode(event: Event) {
