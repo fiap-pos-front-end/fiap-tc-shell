@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,6 +13,8 @@ export class LoginComponent {
   public isSignUpAtivo = false;
   public loginForm!: FormGroup;
   public registerForm!: FormGroup;
+
+  @Input() context : any;
 
   constructor(
     private loginService: LoginService,
@@ -30,7 +32,6 @@ export class LoginComponent {
       password: ['', Validators.required],
       email:['', Validators.required]
     });
-
   }
 
   authUser() {
@@ -56,6 +57,10 @@ export class LoginComponent {
 
   changeMode(event: Event) {
     this.isSignUpAtivo = !this.isSignUpAtivo;
+  }
+
+  closeLogin() {
+    this.context.closeLogin();
   }
 
 }

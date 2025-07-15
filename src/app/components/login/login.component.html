@@ -1,0 +1,60 @@
+<div class="overlay">
+    <div class="modal">
+        <div class="wrapper" [class.active]="isSignUpAtivo">
+            <span class="bg-animate"></span>
+            <span class="bg-animate2"></span>
+                <div class="form-box login">
+                    <h2 class="animation" style="--i:0; --j:21">Login</h2>
+                    <form action="#">
+                        <div class="input-box animation" style="--i:1; --j:22">
+                            <input type="text" required #email>
+                            <label for="email">E-mail</label>
+                        </div>
+                        <div class="input-box animation" style="--i:2; --j:23">
+                            <input type="password" required #password>
+                            <label for="password">Senha</label>
+                        </div>
+        
+                        <button type="submit" class="btn animation" style="--i:3; --j:24" (click)="authUser()">Login</button>
+        
+                        <div class="logreg-link animation" style="--i:4; --j:25">
+                            <p>Ainda não possui conta? <a class="register-link" (click)="changeMode($event)">Registre-se</a></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="info-text login">
+                    <h2 class="animation" style="--i:0; --j:20">Bem-vindo de volta!</h2>
+                    <p class="animation" style="--i:1; --j:21">Acesse sua conta Bytebank e descomplique sua vida financeira.</p>
+                </div>
+                <div class="form-box register">
+                    <h2 class="animation" style="--i:17; --j:0">Registre-se</h2>
+                    <form action="#">
+                        <div class="input-box animation" style="--i:18; --j:1">
+                            <input type="text" required #user>
+                            <label for="user">Usuário</label>
+                        </div>
+                        <div class="input-box animation" style="--i:19; --j:2">
+                                <input type="text" required #email>
+                                <label for="email">E-mail</label>
+                        </div>
+                        <div class="input-box animation" style="--i:20; --j:3">
+                            <input type="password" required #password>
+                            <label for="password">Senha</label>
+                        </div>
+        
+                        <button type="submit" class="btn animation" style="--i:21; --j:4" (click)="createUser()">Registrar</button>
+                        <div class="logreg-link animation" style="--i:22; --j:5">
+                            <p>Já possui uma conta? <a class="login-link" (click)="changeMode($event)">Entrar</a></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="info-text register">
+                    <h2 class="animation" style="--i:17; --j:0">Seja muito bem-vindo!</h2>
+                    <p class="animation" style="--i:18; --j:1">Crie uma conta no Bytebank e venha fazer parte da nossa comunidade.</p>
+                </div>
+        </div>
+        <div class="close-login" (click)="closeLogin()">
+            <i class="pi pi-times"></i>
+        </div>
+    </div>
+</div>
