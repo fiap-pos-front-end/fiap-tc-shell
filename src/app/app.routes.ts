@@ -1,7 +1,7 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './home/home.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
