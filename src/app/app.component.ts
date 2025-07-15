@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'fiap-tc-shell';
 
-  public mainClass = '';
+  public mainClass = 'flex-1 bg-slate-100';
 
   constructor(private router: Router) {
     this.router.events.pipe(
@@ -22,11 +22,9 @@ export class AppComponent {
     ).subscribe((event: NavigationEnd) => {
       const url = event.urlAfterRedirects;
 
-      if (url == '/') {
-        this.mainClass = 'flex-1 bg-slate-100';
-      } else {
-        this.mainClass = 'flex-1 p-4 bg-slate-100';
-      }
+      if (url != '/') {
+        this.mainClass += ' p-4';
+      };
     });
   }
 }
