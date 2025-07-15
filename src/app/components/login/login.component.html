@@ -5,13 +5,13 @@
             <span class="bg-animate2"></span>
                 <div class="form-box login">
                     <h2 class="animation" style="--i:0; --j:21">Login</h2>
-                    <form action="#">
+                    <form action="#" [formGroup]="loginForm">
                         <div class="input-box animation" style="--i:1; --j:22">
-                            <input type="text" required #email>
+                            <input type="text" required #email formControlName="email">
                             <label for="email">E-mail</label>
                         </div>
                         <div class="input-box animation" style="--i:2; --j:23">
-                            <input type="password" required #password>
+                            <input type="password" required #password formControlName="password">
                             <label for="password">Senha</label>
                         </div>
         
@@ -28,17 +28,17 @@
                 </div>
                 <div class="form-box register">
                     <h2 class="animation" style="--i:17; --j:0">Registre-se</h2>
-                    <form action="#">
+                    <form action="#" [formGroup]="registerForm">
                         <div class="input-box animation" style="--i:18; --j:1">
-                            <input type="text" required #user>
+                            <input type="text" required #user formControlName="username">
                             <label for="user">Usuário</label>
                         </div>
                         <div class="input-box animation" style="--i:19; --j:2">
-                                <input type="text" required #email>
+                                <input type="text" required #email formControlName="email">
                                 <label for="email">E-mail</label>
                         </div>
                         <div class="input-box animation" style="--i:20; --j:3">
-                            <input type="password" required #password>
+                            <input type="password" required #password formControlName="password">
                             <label for="password">Senha</label>
                         </div>
         
