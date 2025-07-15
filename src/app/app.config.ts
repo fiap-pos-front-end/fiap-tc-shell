@@ -8,6 +8,8 @@ import { routes } from './app.routes';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { provideHttpClient } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { authReducer } from './store/auth/auth.reducer';
 
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
@@ -16,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
+    provideStore({ auth: authReducer }),
     providePrimeNG({
       theme: {
         preset: Aura,
