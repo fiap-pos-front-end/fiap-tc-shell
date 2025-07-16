@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GalleriaModule } from 'primeng/galleria';
 import { ButtonModule } from 'primeng/button';
 import { LandingPageService } from '../../shared/services/landing-page/landing-page.service';
-import { News } from '../../core/models/news.model';
+import { News } from '../../shared/models/news.model';
 import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-landing-page',
