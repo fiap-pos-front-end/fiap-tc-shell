@@ -1,26 +1,23 @@
-import { Component, OnInit, model } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GalleriaModule } from 'primeng/galleria';
 import { ButtonModule } from 'primeng/button';
-import { LandingPageService } from '../../services/landing-page/landing-page.service';
+import { LandingPageService } from '../../shared/services/landing-page/landing-page.service';
 import { News } from '../../core/models/news.model';
-import { LoginComponent } from '../../components/login/login.component';
+import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-landing-page',
   imports: [GalleriaModule, ButtonModule, LoginComponent],
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.scss'
+  styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent implements OnInit {
-
   public images: News[] = [];
-  public modalOpen : boolean = false;
+  public modalOpen: boolean = false;
 
-  constructor(
-    private loginService: LandingPageService
-  ) {}
+  constructor(private loginService: LandingPageService) {}
 
   ngOnInit(): void {
-    this.loginService.getImages().then((images) => this.images = images);
+    this.loginService.getImages().then((images) => (this.images = images));
   }
 
   openLogin() {
@@ -28,9 +25,8 @@ export class LandingPageComponent implements OnInit {
     this.modalOpen = !this.modalOpen;
   }
 
-  closeLogin(){
+  closeLogin() {
     document.body.style.overflowY = 'auto';
     this.modalOpen = !this.modalOpen;
   }
-
 }
