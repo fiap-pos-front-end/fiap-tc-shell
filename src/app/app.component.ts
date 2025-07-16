@@ -15,13 +15,13 @@ export class AppComponent {
   title = 'fiap-tc-shell';
   mainClass = '';
   secondClass = '';
-  isAuthenticated = false;
+  isAuthenticated = true;
 
   constructor(private router: Router) {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       const url = event.urlAfterRedirects;
-      this.mainClass = (url == '/') ? 'flex-1 bg-slate-100' : 'flex-1 p-4 bg-slate-100';
-      this.secondClass = (url == '/') ? 'mx-auto max-w-10xl' : 'mx-auto max-w-7xl';
+      this.mainClass = url == '/' ? 'flex-1 bg-slate-100' : 'flex-1 p-4 bg-slate-100';
+      this.secondClass = url == '/' ? 'mx-auto max-w-10xl' : 'mx-auto max-w-7xl';
     });
   }
 }

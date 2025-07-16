@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { getLastEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private token = '';
   getToken() {
-    return getLastEvent('jwtToken');
+    return this.token;
+  }
+  setToken(token: string) {
+    this.token = token;
   }
 }
