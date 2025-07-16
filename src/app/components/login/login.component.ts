@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { setToken } from '../../store/auth/auth.actions';
 @Component({
@@ -21,7 +20,6 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private router: Router,
      private store: Store,
   ) {}
 
@@ -49,7 +47,7 @@ export class LoginComponent {
           const token = res?.result?.token;
           if (token) {
             this.store.dispatch(setToken({ token }));
-            this.router.navigate(['/home']);
+            window.location.href = '/home';
           }
         },
         error: err => {
@@ -70,7 +68,7 @@ export class LoginComponent {
           if (token) {
             this.store.dispatch(setToken({ token }));
           }
-          this.router.navigate(['/home']);
+          window.location.href = '/home';
         },
         error: err => {
           console.error('Erro ao criar usuário:', err);
