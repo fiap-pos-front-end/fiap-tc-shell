@@ -13,18 +13,16 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'fiap-tc-shell';
-
-  public mainClass = 'flex-1 bg-slate-100';
+  mainClass = 'flex-1 bg-slate-100';
+  isAuthenticated = false;
 
   constructor(private router: Router) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       const url = event.urlAfterRedirects;
 
       if (url != '/') {
         this.mainClass += ' p-4';
-      };
+      }
     });
   }
 }
