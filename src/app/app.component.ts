@@ -13,9 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'fiap-tc-shell';
-
-  public mainClass   = '';
-  public secondClass = '';
+  mainClass = '';
+  secondClass = '';
 
   constructor(private router: Router) {
     this.router.events.pipe(
