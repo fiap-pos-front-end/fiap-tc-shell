@@ -37,7 +37,7 @@ import { Ripple } from 'primeng/ripple';
   `,
 })
 export class MenubarComponent {
-  readonly logoutMenu: MenuItem[] = [{ label: 'Sair', routerLink: '', icon: 'pi pi-sign-out' }];
+  readonly logoutMenu: MenuItem[] = [{ label: 'Sair', routerLink: '/', icon: 'pi pi-sign-out' }];
   readonly menus: MenuItem[] = [
     { label: 'Início', routerLink: '/home', icon: 'pi pi-home', routerLinkActiveOptions: { exact: true } },
     { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
