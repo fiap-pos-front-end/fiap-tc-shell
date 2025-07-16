@@ -2,7 +2,10 @@ import { Component, Input } from '@angular/core';
 import { LoginService } from '../../shared/services/login/login.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { setToken } from '../../store/auth/auth.actions';
+import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
+import { setToken } from '../../shared/store/auth/auth.actions';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -21,6 +24,9 @@ export class LoginComponent {
     private loginService: LoginService,
     private fb: FormBuilder,
     private store: Store,
+    private router: Router,
+    private vps: ViewportScroller,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -49,7 +55,9 @@ export class LoginComponent {
             const token = res?.result?.token;
             if (token) {
               this.store.dispatch(setToken({ token }));
-              window.location.href = '/home';
+              this.router.navigate(['/home']);
+              this.vps.scrollToPosition([0, 0]);
+              this.authService.setToken(token);
             }
           },
           error: (err) => {

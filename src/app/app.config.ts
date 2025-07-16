@@ -10,8 +10,8 @@ import pt from 'primelocale/pt-BR.json';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
-import { authReducer } from './store/auth/auth.reducer';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { authReducer } from './shared/store/auth/auth.reducer';
 
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
