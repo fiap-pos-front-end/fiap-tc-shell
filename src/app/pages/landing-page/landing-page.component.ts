@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { GalleriaModule } from 'primeng/galleria';
 import { ButtonModule } from 'primeng/button';
-import { LandingPageService } from '../../shared/services/landing-page/landing-page.service';
+import { GalleriaModule } from 'primeng/galleria';
 import { News } from '../../shared/models/news.model';
+import { LandingPageService } from '../../shared/services/landing-page/landing-page.service';
 import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-landing-page',
   imports: [GalleriaModule, ButtonModule, LoginComponent],
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent implements OnInit {
   public images: News[] = [];
@@ -17,6 +16,7 @@ export class LandingPageComponent implements OnInit {
   constructor(private loginService: LandingPageService) {}
 
   ngOnInit(): void {
+    document.body.style.overflowY = 'auto';
     this.loginService.getImages().then((images) => (this.images = images));
   }
 

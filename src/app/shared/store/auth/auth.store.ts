@@ -11,7 +11,6 @@ const initialState: AuthState = {
   token: localStorage.getItem(TC_TOKEN_KEY) ?? '',
 };
 
-// TODO: conectar com localStorage para salvar o token
 export const AuthStore = signalStore(
   { providedIn: 'root' },
 

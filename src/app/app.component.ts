@@ -34,6 +34,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.authStore.token();
-    this.authStore.setToken(token); // Initialize token for MFEs
+    this.authStore.setToken(token); // Note: talvez não seja o melhor jeito, mas por ora, garante que os MFEs receberão o novo token
   }
 }
