@@ -19,7 +19,9 @@
           <button type="submit" class="btn animation" style="--i: 3; --j: 24" (click)="authUser()">Login</button>
 
           <div class="logreg-link animation" style="--i: 4; --j: 25">
-            <p>Ainda não possui conta? <a class="register-link" (click)="changeMode()">Registre-se</a></p>
+            <p>
+              Ainda não possui conta? <a class="cursor-pointer register-link" (click)="changeMode()">Registre-se</a>
+            </p>
           </div>
         </form>
       </div>
@@ -45,7 +47,7 @@
 
           <button type="submit" class="btn animation" style="--i: 21; --j: 4" (click)="createUser()">Registrar</button>
           <div class="logreg-link animation" style="--i: 22; --j: 5">
-            <p>Já possui uma conta? <a class="login-link" (click)="changeMode()">Entrar</a></p>
+            <p>Já possui uma conta? <a class="cursor-pointer login-link" (click)="changeMode()">Entrar</a></p>
           </div>
         </form>
       </div>
