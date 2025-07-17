@@ -68,7 +68,7 @@ export class LoginComponent {
           },
         });
     } else {
-      this.messageService.add({ severity: 'warn ', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
     }
   }
 
@@ -93,7 +93,7 @@ export class LoginComponent {
         this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Insira um e-mail válido', life: 3000});
       }
     } else {
-      this.messageService.add({ severity: 'warn ', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
     }
   }
 
