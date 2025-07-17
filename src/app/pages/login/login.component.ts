@@ -1,13 +1,12 @@
-import { Component, Input, inject } from '@angular/core';
-import { LoginService } from '../../shared/services/login/login.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { AuthService } from '../../shared/services/auth.service';
-import { setToken } from '../../shared/store/auth/auth.actions';
+import { Component, inject, Input } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
+import { LoginService } from '../../shared/services/login/login.service';
+import { AuthStore } from '../../shared/store/auth/auth.store';
+
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, Toast],
@@ -17,6 +16,8 @@ import { Toast } from 'primeng/toast';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  private readonly authStore = inject(AuthStore);
+
   public isSignUpAtivo = false;
   public loginForm!: FormGroup;
   public registerForm!: FormGroup;
@@ -28,10 +29,8 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private store: Store,
     private router: Router,
     private vps: ViewportScroller,
-    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -48,33 +47,29 @@ export class LoginComponent {
   }
 
   authUser() {
-    if (this.loginForm.valid) {
-      this.loginService
-        .authUser({
-          Body: { email: this.loginForm.value.email, password: this.loginForm.value.password },
-        })
-        .subscribe({
-          next: (res) => {
-            const token = res?.result?.token;
-            if (token) {
-              this.store.dispatch(setToken({ token }));
-              this.router.navigate(['/home']);
-              this.vps.scrollToPosition([0, 0]);
-              this.authService.setToken(token);
-            }
-          },
-          error: (err) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Erro',
-              detail: 'Não foi possível autenticar o usuário!',
-              life: 2500,
-            });
-          },
-        });
-    } else {
+    if (!this.loginForm.valid) {
       this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
+      return;
     }
+
+    this.loginService.authUser(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+      next: (res) => {
+        const token = res?.access_token;
+        if (token) {
+          this.authStore.setToken(token);
+          this.router.navigate(['/home']);
+          this.vps.scrollToPosition([0, 0]);
+        }
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Não foi possível autenticar o usuário!',
+          life: 2500,
+        });
+      },
+    });
   }
 
   createUser() {
@@ -90,7 +85,7 @@ export class LoginComponent {
             window.location.href = '/home';
             this.vps.scrollToPosition([0, 0]);
           },
-          error: (err) => {
+          error: () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Erro',
@@ -112,7 +107,7 @@ export class LoginComponent {
     }
   }
 
-  changeMode(event: Event) {
+  changeMode() {
     this.isSignUpAtivo = !this.isSignUpAtivo;
   }
 
