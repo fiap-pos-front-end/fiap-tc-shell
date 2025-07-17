@@ -12,6 +12,7 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { authReducer } from './shared/store/auth/auth.reducer';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
@@ -32,5 +33,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     { provide: LOCALE_ID, useValue: 'pt-BR' },
+    provideClientHydration(withEventReplay()),
   ],
 };

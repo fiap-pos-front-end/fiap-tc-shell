@@ -3,7 +3,6 @@ const { shareAll, withModuleFederationPlugin } = require("@angular-architects/mo
 module.exports = withModuleFederationPlugin({
   name: "fiap-tc-shell",
   filename: "remoteEntry.js",
-
   shared: {
     ...shareAll({
       singleton: true,

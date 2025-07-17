@@ -5,8 +5,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'lp', pathMatch: 'full' },
   {
-    path: '',
+    path: 'lp',
     component: LandingPageComponent,
   },
   {
