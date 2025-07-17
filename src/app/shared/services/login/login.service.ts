@@ -4,11 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 // TODO: mover isso para o shared
-type CreateUserResponsePayload = {
-  access_token: string;
-};
-
-type AuthUserResponsePayload = {
+export type AuthResponsePayload = {
   access_token: string;
 };
 
@@ -20,14 +16,18 @@ export class LoginService {
 
   private readonly userBaseUrl = `${environment.apiUrl}/auth`;
 
-  createUser(user: { Body: { username: string; email: string; password: string } }): Observable<any> {
-    return this.httpClient.post<CreateUserResponsePayload>(this.userBaseUrl, user.Body, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    });
+  createUser(username: string, email: string, password: string): Observable<AuthResponsePayload> {
+    return this.httpClient.post<AuthResponsePayload>(
+      `${this.userBaseUrl}/register`,
+      { email, password },
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      },
+    );
   }
 
-  authUser(email: string, password: string): Observable<AuthUserResponsePayload> {
-    return this.httpClient.post<AuthUserResponsePayload>(
+  authUser(email: string, password: string): Observable<AuthResponsePayload> {
+    return this.httpClient.post<AuthResponsePayload>(
       `${this.userBaseUrl}/login`,
       { email, password },
       {
