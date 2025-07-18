@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { LoginService } from '../../shared/services/login/login.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -6,10 +6,13 @@ import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { setToken } from '../../shared/store/auth/auth.actions';
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Toast],
   standalone: true,
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -19,6 +22,8 @@ export class LoginComponent {
   public registerForm!: FormGroup;
 
   @Input() context: any;
+
+  private messageService = inject(MessageService);
 
   constructor(
     private loginService: LoginService,
@@ -40,8 +45,6 @@ export class LoginComponent {
       password: ['', Validators.required],
       email: ['', Validators.required],
     });
-
-    this.loginService.getUser().subscribe(console.log);
   }
 
   authUser() {
@@ -61,31 +64,51 @@ export class LoginComponent {
             }
           },
           error: (err) => {
-            console.error('Erro ao autenticar:', err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível autenticar o usuário!',
+              life: 2500,
+            });
           },
         });
     } else {
-      console.log('Formulário inválido');
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
     }
   }
 
   createUser() {
     if (this.registerForm.valid) {
       const user = this.registerForm.value;
-      this.loginService.createUser({ Body: user }).subscribe({
-        next: (res) => {
-          const token = res?.result?.token;
-          if (token) {
-            this.store.dispatch(setToken({ token }));
-          }
-          window.location.href = '/home';
-        },
-        error: (err) => {
-          console.error('Erro ao criar usuário:', err);
-        },
-      });
+      if (this.loginService.emailValidator(user.email)) {
+        this.loginService.createUser({ Body: user }).subscribe({
+          next: (res) => {
+            const token = res?.result?.token;
+            if (token) {
+              this.store.dispatch(setToken({ token }));
+            }
+            window.location.href = '/home';
+            this.vps.scrollToPosition([0, 0]);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível criar o usuário',
+              life: 2500,
+            });
+          },
+        });
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Atenção',
+          detail: 'Insira um e-mail válido',
+          life: 3000,
+        });
+      }
     } else {
-      console.warn('Formulário inválido!');
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
     }
   }
 

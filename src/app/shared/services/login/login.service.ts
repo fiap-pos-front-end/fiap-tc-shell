@@ -28,4 +28,9 @@ export class LoginService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     });
   }
+
+  emailValidator(email: string): boolean {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim());
+  }
 }
