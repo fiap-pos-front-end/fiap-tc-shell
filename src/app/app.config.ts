@@ -9,9 +9,7 @@ import Aura from '@primeng/themes/aura';
 import pt from 'primelocale/pt-BR.json';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import { provideStore } from '@ngrx/store';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { authReducer } from './shared/store/auth/auth.reducer';
 
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
@@ -21,7 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
     provideHttpClient(),
-    provideStore({ auth: authReducer }),
     providePrimeNG({
       translation: pt['pt-BR'],
       theme: {

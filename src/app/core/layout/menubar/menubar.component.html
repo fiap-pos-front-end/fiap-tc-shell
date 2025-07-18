@@ -21,7 +21,7 @@
           shape="circle"
           (click)="logout.toggle($event)"
         ></p-avatar>
-        <p-menu #logout [model]="logoutMenu" [popup]="true" />
+        <p-menu #logout (click)="onLogout()" [model]="logoutMenu" [popup]="true" />
       </div>
     </ng-template>
   </p-menubar>
