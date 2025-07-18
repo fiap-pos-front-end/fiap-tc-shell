@@ -7,10 +7,10 @@ import { ViewportScroller } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { setToken } from '../../shared/store/auth/auth.actions';
 import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, ToastModule],
+  imports: [ReactiveFormsModule, Toast],
   standalone: true,
   providers: [MessageService],
   templateUrl: './login.component.html',
@@ -23,7 +23,7 @@ export class LoginComponent {
 
   @Input() context: any;
 
-   private messageService = inject(MessageService);
+  private messageService = inject(MessageService);
 
   constructor(
     private loginService: LoginService,
@@ -64,11 +64,16 @@ export class LoginComponent {
             }
           },
           error: (err) => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível autenticar o usuário!', life: 2500});
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível autenticar o usuário!',
+              life: 2500,
+            });
           },
         });
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
     }
   }
 
@@ -77,23 +82,33 @@ export class LoginComponent {
       const user = this.registerForm.value;
       if (this.loginService.emailValidator(user.email)) {
         this.loginService.createUser({ Body: user }).subscribe({
-                next: (res) => {
-                  const token = res?.result?.token;
-                  if (token) {
-                    this.store.dispatch(setToken({ token }));
-                  }
-                  window.location.href = '/home';
-                  this.vps.scrollToPosition([0, 0]);
-                },
-                error: (err) => {
-                  this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível criar o usuário', life: 2500});
-                },
-              });
+          next: (res) => {
+            const token = res?.result?.token;
+            if (token) {
+              this.store.dispatch(setToken({ token }));
+            }
+            window.location.href = '/home';
+            this.vps.scrollToPosition([0, 0]);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível criar o usuário',
+              life: 2500,
+            });
+          },
+        });
       } else {
-        this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Insira um e-mail válido', life: 3000});
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Atenção',
+          detail: 'Insira um e-mail válido',
+          life: 3000,
+        });
       }
     } else {
-      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500});
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
     }
   }
 
