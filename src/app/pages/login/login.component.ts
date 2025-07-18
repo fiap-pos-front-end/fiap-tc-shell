@@ -11,7 +11,7 @@ import { AuthStore } from '../../shared/store/auth/auth.store';
   selector: 'app-login',
   imports: [ReactiveFormsModule, Toast],
   standalone: true,
-  providers: [MessageService],
+  providers: [MessageService, Toast],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
