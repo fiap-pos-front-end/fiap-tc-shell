@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { TransactionDTO } from '@fiap-pos-front-end/fiap-tc-shared';
 import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
-import { Transaction } from '../home.component';
 
 @Component({
   selector: 'app-statement',
   standalone: true,
   imports: [CommonModule, DataViewModule, TagModule],
   templateUrl: './statement.component.html',
-  styleUrls: ['./statement.component.scss'],
 })
 export class StatementComponent {
-  transactions = input.required<Transaction[]>();
+  transactions = input.required<TransactionDTO[]>();
 }
