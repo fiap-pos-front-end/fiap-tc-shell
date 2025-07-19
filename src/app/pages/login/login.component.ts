@@ -2,9 +2,10 @@ import { ViewportScroller } from '@angular/common';
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
-import { AuthResponsePayload, LoginService } from '../../shared/services/login/login.service';
+import { LoginService } from '../../shared/services/login/login.service';
 import { AuthStore } from '../../shared/store/auth/auth.store';
 
 @Component({
@@ -16,22 +17,18 @@ import { AuthStore } from '../../shared/store/auth/auth.store';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private messageService = inject(MessageService);
+  private loginService = inject(LoginService);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private vps = inject(ViewportScroller);
   private readonly authStore = inject(AuthStore);
 
   public isSignUpAtivo = false;
   public loginForm!: FormGroup;
   public registerForm!: FormGroup;
 
-  @Input() context: any;
-
-  private messageService = inject(MessageService);
-
-  constructor(
-    private loginService: LoginService,
-    private fb: FormBuilder,
-    private router: Router,
-    private vps: ViewportScroller,
-  ) {}
+  @Input() context!: { closeLogin: () => void };
 
   ngOnInit() {
     document.body.style.overflowY = 'hidden';
