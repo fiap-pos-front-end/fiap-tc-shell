@@ -1,7 +1,7 @@
 <div class="flex flex-col md:flex-row">
-  <div class="md:w-8/12 lg:w-8/12 w-full flex flex-col">
-    <div class="p-2 flex-none">
-      <div class="w-full rounded-lg shadow p-4 bg-sky-200">
+  <div class="flex flex-col w-full md:w-8/12 lg:w-8/12">
+    <div class="flex-none p-2">
+      <div class="p-4 w-full bg-sky-200 rounded-lg shadow">
         <div class="flex justify-between items-start">
           <h1 class="text-xl font-semibold">Olá, {{ user }}!</h1>
           <span class="text-sm">{{ dateToday | date: "dd/MM/yyyy" }}</span>
@@ -14,23 +14,23 @@
             </button>
           </div>
           <h2 class="mt-2 text-3xl font-bold">
-            {{ toggleVisibility ? (balance | currency: "BRL" : "symbol" : "1.2-2") : "••••••••••••" }}
+            {{ toggleVisibility ? (balance() | currency: "BRL" : "symbol" : "1.2-2") : "••••••••••••" }}
           </h2>
         </div>
       </div>
     </div>
 
-    <div class="p-2 flex-1 overflow-auto">
-      <div class="w-full h-full overflow-hidden rounded-lg shadow p-4 flex flex-col bg-gray-100">
-        <h2 class="text-xl font-semibold mb-4">Extrato</h2>
-        <app-statement />
+    <div class="overflow-auto flex-1 p-2">
+      <div class="flex overflow-hidden flex-col p-4 w-full h-full bg-gray-100 rounded-lg shadow">
+        <h2 class="mb-4 text-xl font-semibold">Extrato</h2>
+        <app-statement [transactions]="transactions()" />
       </div>
     </div>
   </div>
 
   <aside class="md:w-4/12 lg:w-4/12 h-[calc(100vh-10rem)] w-full p-2 flex flex-col overflow-auto">
-    <div class="w-full overflow-auto rounded-lg shadow p-4 flex flex-col bg-gray-100">
-      <h2 class="text-xl font-semibold mb-4">Resumo</h2>
+    <div class="flex overflow-auto flex-col p-4 w-full bg-gray-100 rounded-lg shadow">
+      <h2 class="mb-4 text-xl font-semibold">Resumo</h2>
       <app-react-wrapper />
     </div>
   </aside>
