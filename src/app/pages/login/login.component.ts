@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -15,7 +15,7 @@ import { AuthStore } from '../../shared/store/auth/auth.store';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   private readonly authStore = inject(AuthStore);
 
   public isSignUpAtivo = false;
@@ -34,6 +34,8 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
+    document.body.style.overflowY = 'hidden';
+
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -44,6 +46,10 @@ export class LoginComponent {
       password: ['', Validators.required],
       email: ['', Validators.required],
     });
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflowY = 'auto';
   }
 
   authUser() {
