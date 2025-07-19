@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterComponent, MenubarComponent } from '@shell/core';
 import { filter } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { AuthStore } from './shared/store/auth/auth.store';
   imports: [RouterOutlet, MenubarComponent, FooterComponent, CommonModule],
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private readonly router = inject(Router);
   private readonly authStore = inject(AuthStore);
 
@@ -29,11 +29,7 @@ export class AppComponent implements OnInit {
     effect(() => {
       const token = this.authStore.token();
       this.isAuthenticated.set(!!token && token !== '');
+      this.authStore.setToken(token);
     });
-  }
-
-  ngOnInit(): void {
-    const token = this.authStore.token();
-    this.authStore.setToken(token); // Note: talvez não seja o melhor jeito, mas por ora, garante que os MFEs receberão o novo token
   }
 }
