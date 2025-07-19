@@ -18,7 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    provideHttpClient(),
     providePrimeNG({
       translation: pt['pt-BR'],
       theme: {

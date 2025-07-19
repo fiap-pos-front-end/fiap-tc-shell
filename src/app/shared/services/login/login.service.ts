@@ -1,12 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-
-// TODO: mover isso para o shared
-export type AuthResponsePayload = {
-  access_token: string;
-};
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +32,7 @@ export class LoginService {
     );
   }
 
-  getUser(): Observable<any> {
+  getUser(): Observable<unknown> {
     return this.httpClient.get(this.userBaseUrl, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     });
