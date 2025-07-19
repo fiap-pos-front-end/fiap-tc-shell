@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'transferencias',
+    canActivate: [authGuard],
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
@@ -24,11 +26,16 @@ export const routes: Routes = [
   },
   {
     path: 'categorias',
+    canActivate: [authGuard],
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: environment.urlMfAngular2,
         exposedModule: './routes',
       }).then((m) => m.routes),
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
