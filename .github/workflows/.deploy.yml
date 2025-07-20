@@ -18,20 +18,18 @@ jobs:
           always-auth: true
 
       - name: Instalar Dependencias
-      - run: npm ci
+        run: npm ci
 
       - name: Buildar Projeto
-      - run: |
-          npm run build
+        run: npm run build
 
       - name: Verificar identidade AWS
         run: aws sts get-caller-identity
 
       - name: Deploy
-      - uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - run: |
-          aws s3 sync ./dist/fiap-tc-shell s3://${{ secrets.S3_BUCKET }}/fiap-tc-shell/deploy --delete --acl public-read
+        run: aws s3 sync ./dist/fiap-tc-shell s3://${{ secrets.S3_BUCKET }}/fiap-tc-shell/deploy --delete --acl public-read
