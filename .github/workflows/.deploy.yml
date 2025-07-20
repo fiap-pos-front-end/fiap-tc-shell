@@ -1,5 +1,4 @@
----
-name: Build & Deploy MFE
+name: Deploy Shell MFE no S3
 on:
   push:
     branches:
@@ -25,9 +24,6 @@ jobs:
       - name: Buildar Projeto
         run: npm run build
 
-      - name: Verificar identidade AWS
-        run: aws sts get-caller-identity
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -35,7 +31,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy to S3
+      - name: Verificar identidade AWS
+        run: aws sts get-caller-identity
+
+      - name: Deploy
         run: |
           aws s3 sync ./dist/fiap-tc-shell \
             s3://${{ secrets.S3_BUCKET }}/fiap-tc-shell/deploy \
