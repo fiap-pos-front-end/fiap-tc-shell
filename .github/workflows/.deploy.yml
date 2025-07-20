@@ -17,11 +17,17 @@ jobs:
           scope: "@fiap-pos-front-end"
           always-auth: true
 
+      - name: Instalar Dependencias
       - run: npm ci
 
+      - name: Buildar Projeto
       - run: |
           npm run build
 
+      - name: Verificar identidade AWS
+        run: aws sts get-caller-identity
+
+      - name: Deploy
       - uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
