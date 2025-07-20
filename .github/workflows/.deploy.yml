@@ -28,5 +28,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - run: |
-          aws s3 sync ./dist s3://fiap-tc-shell/deploy \
+          aws s3 sync ./dist/fiap-tc-shell s3://${{ secrets.S3_BUCKET }}/fiap-tc-shell/deploy \
             --delete --acl public-read
