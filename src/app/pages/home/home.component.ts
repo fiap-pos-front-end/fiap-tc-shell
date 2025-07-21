@@ -1,16 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
-import { EVENTS, TransactionDTO, getLastEvent } from '@fiap-pos-front-end/fiap-tc-shared';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { EVENTS, TransactionDTO, emitEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { ReactWrapperComponent } from '@shell/core';
 import { StatementComponent } from './statement/statement.component';
-
-export type Transaction = {
-  id: number;
-  type: string;
-  amount: number;
-  category: string;
-  date: Date;
-};
+import { finalize } from 'rxjs';
+import { TransactionService } from '../../shared/services/transaction/transaction.service';
 
 @Component({
   selector: 'app-home',
@@ -18,34 +13,35 @@ export type Transaction = {
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
+  private readonly transactionService = inject(TransactionService);
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
-
+  isLoading = true;
   balance = signal(0);
-  transactions = signal<TransactionDTO[]>([]);
+  transactions = signal([]);
 
   ngOnInit() {
-    const transactionsReceived = getLastEvent(EVENTS.TRANSACTIONS_UPDATED);
-    this.transactions.set(this.mapTransactionsToViewModel(transactionsReceived));
-    this.balance.set(this.calculateBalance(this.transactions()));
+    this.initialLoading();
+  }
+  initialLoading() {
+    this.getAllTransactions();
   }
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  private mapTransactionsToViewModel(transactions: any[]): TransactionDTO[] {
-    return (transactions || []).map((transaction) => ({
-      amount: transaction.amount.amount,
-      category: transaction.category,
-      date: new Date(transaction.date),
-      id: parseInt(transaction.id),
-      type: transaction.type,
-    }));
+  private getAllTransactions() {
+    this.transactionService
+      .getAll()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((transactions: any) => {
+        emitEvent(EVENTS.TRANSACTIONS_UPDATED, transactions);
+        this.transactions.set(transactions);
+        this.balance.set(this.calculateBalance(this.transactions()));
+      });
   }
 
   private calculateBalance(transactions: TransactionDTO[]): number {
-    // TODO: melhorar a tipagem quando estiver no /shared
     return transactions.reduce((acc, transaction) => {
-      if (transaction.type === 'Receita') {
+      if (transaction.type === 'RECEITA') {
         return acc + transaction.amount;
       }
 

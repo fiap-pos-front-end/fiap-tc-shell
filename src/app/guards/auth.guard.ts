@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { inject, untracked } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthStore } from '../shared/store/auth/auth.store';
 
@@ -6,12 +6,12 @@ export const authGuard: CanActivateFn = () => {
   const auth = inject(AuthStore);
   const router = inject(Router);
 
-  const token = auth.token();
+  const token = untracked(() => auth.token());
 
-  if (token && token.trim().length > 0) {
+  if (token?.trim()) {
     return true;
   }
 
-  router.navigate(['/login']);
+  router.navigate(['/inicio']);
   return false;
 };
