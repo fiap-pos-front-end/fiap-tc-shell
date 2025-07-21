@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
@@ -16,7 +16,7 @@ import { AuthStore } from '../../shared/store/auth/auth.store';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   private messageService = inject(MessageService);
   private loginService = inject(LoginService);
   private fb = inject(FormBuilder);
@@ -31,6 +31,8 @@ export class LoginComponent {
   @Input() context!: { closeLogin: () => void };
 
   ngOnInit() {
+    document.body.style.overflowY = 'hidden';
+
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -41,6 +43,10 @@ export class LoginComponent {
       password: ['', Validators.required],
       email: ['', Validators.required],
     });
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflowY = 'auto';
   }
 
   authUser() {

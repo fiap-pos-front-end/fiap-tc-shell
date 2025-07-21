@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LandingPageService {
-  getData() {
+  getImages() {
     return [
       {
         itemImageSrc: 'assets/images/gallery/banner_1.png',
@@ -31,9 +31,5 @@ export class LandingPageService {
         title: 'Tecnologia a favor da sua economia',
       },
     ];
-  }
-
-  getImages() {
-    return Promise.resolve(this.getData());
   }
 }
