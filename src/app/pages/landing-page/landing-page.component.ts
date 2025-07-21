@@ -16,17 +16,14 @@ export class LandingPageComponent implements OnInit {
   constructor(private loginService: LandingPageService) {}
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'auto';
-    this.loginService.getImages().then((images) => (this.images = images));
+    this.images = this.loginService.getImages();
   }
 
   openLogin() {
-    document.body.style.overflowY = 'hidden';
     this.modalOpen = !this.modalOpen;
   }
 
   closeLogin() {
-    document.body.style.overflowY = 'auto';
     this.modalOpen = !this.modalOpen;
   }
 }
