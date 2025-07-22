@@ -26,3 +26,7 @@
     </ng-template>
   </p-menubar>
 </div>
+
+<div *ngIf="modalOpen">
+  <app-login [context]="this" (close)="modalOpen = false" />
+</div>

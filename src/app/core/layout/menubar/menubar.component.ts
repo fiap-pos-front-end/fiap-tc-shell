@@ -7,11 +7,12 @@ import { Menu, MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { Ripple } from 'primeng/ripple';
 import { AuthStore } from '../../../shared/store/auth/auth.store';
+import { LoginComponent } from '../../../pages/login/login.component';
 
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
-  imports: [MenubarModule, AvatarModule, Ripple, CommonModule, RouterModule, MenuModule, Menu],
+  imports: [MenubarModule, AvatarModule, Ripple, CommonModule, RouterModule, MenuModule, Menu, LoginComponent],
   styles: `
     .p-menuitem-link-active {
       border-radius: 0.5rem;
@@ -26,30 +27,43 @@ export class MenubarComponent {
 
   readonly logout = viewChild<Menu>('logout');
 
-  readonly logoutMenu: MenuItem[] = [{ label: 'Sair', routerLink: '/', icon: 'pi pi-sign-out' }];
-
+  logoutMenu: MenuItem[] = [];
   menus: MenuItem[] = [];
 
   isAuthenticated = signal(false);
+  modalOpen = false;
 
   constructor() {
     effect(() => {
       const token = this.authStore.token();
-      this.isAuthenticated.set(!!token);
-      if (token) {
-        this.menus = [
-          { label: 'Início', routerLink: '/home', icon: 'pi pi-home' },
-          { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
-          { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
-        ];
-      } else {
-        this.menus = [];
-      }
+      const isLoggedIn = !!token;
+
+      this.isAuthenticated.set(isLoggedIn);
+
+      this.menus = isLoggedIn
+        ? [
+            { label: 'Início', routerLink: '/home', icon: 'pi pi-home' },
+            { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
+            { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
+          ]
+        : [];
+
+      this.logoutMenu = isLoggedIn
+        ? [{ label: 'Sair', icon: 'pi pi-sign-out', command: () => this.onLogout() }]
+        : [{ label: 'Entrar', icon: 'pi pi-sign-in', command: () => this.openLogin() }];
     });
   }
 
   onLogout() {
     this.authStore.clearToken();
     this.router.navigate(['/']);
+  }
+
+  openLogin() {
+    this.modalOpen = !this.modalOpen;
+  }
+
+  closeLogin() {
+    this.modalOpen = !this.modalOpen;
   }
 }
