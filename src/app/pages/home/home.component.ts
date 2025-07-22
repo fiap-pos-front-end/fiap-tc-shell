@@ -4,14 +4,6 @@ import { EVENTS, TransactionDTO, getLastEvent } from '@fiap-pos-front-end/fiap-t
 import { ReactWrapperComponent } from '@shell/core';
 import { StatementComponent } from './statement/statement.component';
 
-export type Transaction = {
-  id: number;
-  type: string;
-  amount: number;
-  category: string;
-  date: Date;
-};
-
 @Component({
   selector: 'app-home',
   imports: [ReactWrapperComponent, DatePipe, CommonModule, StatementComponent],
@@ -43,7 +35,6 @@ export class HomeComponent implements OnInit {
   }
 
   private calculateBalance(transactions: TransactionDTO[]): number {
-    // TODO: melhorar a tipagem quando estiver no /shared
     return transactions.reduce((acc, transaction) => {
       if (transaction.type === 'Receita') {
         return acc + transaction.amount;
