@@ -14,7 +14,7 @@ import { TransactionService } from '../../shared/services/transaction/transactio
 })
 export class HomeComponent implements OnInit {
   private readonly transactionService = inject(TransactionService);
-  
+
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
@@ -34,8 +34,10 @@ export class HomeComponent implements OnInit {
       .getAll()
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((transactions: any) => {
-        emitEvent(EVENTS.TRANSACTIONS_UPDATED, transactions);
-        this.transactions.set(transactions);
+        const order = transactions.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+        emitEvent(EVENTS.TRANSACTIONS_UPDATED, order);
+        this.transactions.set(order);
         this.balance.set(this.calculateBalance(this.transactions()));
       });
   }
