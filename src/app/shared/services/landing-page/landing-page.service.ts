@@ -7,26 +7,26 @@ export class LandingPageService {
   getImages() {
     return [
       {
-        itemImageSrc: 'assets/images/gallery/image-ByteBank.png',
-        thumbnailImageSrc: 'assets/images/gallery/image-ByteBank.png',
+        itemImageSrc: 'assets/images/gallery/banner_1.png',
+        thumbnailImageSrc: 'assets/images/gallery/banner_1.png',
         alt: 'É novo por aqui ? Clique para conferir mais sobre nós',
         title: 'Conheça o Bytebank',
       },
       {
-        itemImageSrc: 'assets/images/gallery/image-newUpdate.png',
-        thumbnailImageSrc: 'assets/images/gallery/image-newUpdate.png',
-        alt: 'Confira a nova interface modernizada do nosso aplicativo',
-        title: 'Nova atualização disponível',
+        itemImageSrc: 'assets/images/gallery/banner_2.png',
+        thumbnailImageSrc: 'assets/images/gallery/banner_2.png',
+        alt: 'Batemos recorde históricos para nós e tudo graças a vocês',
+        title: 'Aumento na receita e assinantes!',
       },
       {
-        itemImageSrc: 'assets/images/gallery/image-app_ByteBank.png',
-        thumbnailImageSrc: 'assets/images/gallery/image-app_ByteBank.png',
+        itemImageSrc: 'assets/images/gallery/banner_3.png',
+        thumbnailImageSrc: 'assets/images/gallery/banner_3.png',
         alt: 'Fiquem ligados na próxima etapa de desafios',
         title: 'Bytebank no seu smartphone?',
       },
       {
-        itemImageSrc: 'assets/images/gallery/image-TI_FINANCAS.png',
-        thumbnailImageSrc: 'assets/images/gallery/image-TI_FINANCAS.png',
+        itemImageSrc: 'assets/images/gallery/banner_4.png',
+        thumbnailImageSrc: 'assets/images/gallery/banner_4.png',
         alt: 'Leia esse artigo incrível para entender mais',
         title: 'Tecnologia a favor da sua economia',
       },

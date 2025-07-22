@@ -10,7 +10,7 @@ import { AuthStore } from './shared/store/auth/auth.store';
 })
 export class AppComponent {
   private readonly authStore = inject(AuthStore);
-
+  
   effect = effect(() => {
     this.authStore.setToken(this.authStore.token());
   });

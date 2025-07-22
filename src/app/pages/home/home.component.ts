@@ -14,6 +14,7 @@ import { TransactionService } from '../../shared/services/transaction/transactio
 })
 export class HomeComponent implements OnInit {
   private readonly transactionService = inject(TransactionService);
+  
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
