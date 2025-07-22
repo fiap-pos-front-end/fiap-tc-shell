@@ -3,18 +3,17 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { EVENTS, TransactionDTO, emitEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { ReactWrapperComponent } from '@shell/core';
-import { StatementComponent } from './statement/statement.component';
 import { finalize } from 'rxjs';
 import { TransactionService } from '../../shared/services/transaction/transaction.service';
+import { StatementWrapperComponent } from '../../core/statement-wrapper/statement-wrapper.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactWrapperComponent, DatePipe, CommonModule, StatementComponent],
+  imports: [ReactWrapperComponent, DatePipe, CommonModule, StatementWrapperComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
   private readonly transactionService = inject(TransactionService);
-
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
