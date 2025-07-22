@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, effect, viewChild, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
@@ -28,11 +28,25 @@ export class MenubarComponent {
 
   readonly logoutMenu: MenuItem[] = [{ label: 'Sair', routerLink: '/', icon: 'pi pi-sign-out' }];
 
-  readonly menus: MenuItem[] = [
-    { label: 'Início', routerLink: '/home', icon: 'pi pi-home', routerLinkActiveOptions: { exact: true } },
-    { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
-    { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
-  ];
+  menus: MenuItem[] = [];
+
+  isAuthenticated = signal(false);
+
+  constructor() {
+    effect(() => {
+      const token = this.authStore.token();
+      this.isAuthenticated.set(!!token);
+      if (token) {
+        this.menus = [
+          { label: 'Início', routerLink: '/home', icon: 'pi pi-home' },
+          { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
+          { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
+        ];
+      } else {
+        this.menus = [];
+      }
+    });
+  }
 
   onLogout() {
     this.authStore.clearToken();
