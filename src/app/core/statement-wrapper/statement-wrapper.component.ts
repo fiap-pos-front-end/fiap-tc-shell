@@ -14,9 +14,9 @@ export class StatementWrapperComponent implements OnInit {
     const module = await loadRemoteModule({
       type: 'module',
       remoteEntry: environment.urlMfAngular,
-      exposedModule: './TransactionsPage',
+      exposedModule: './StatementPage',
     });
 
-    this.vc.createComponent(module.TransactionsPageComponent);
+    this.vc.createComponent(module.StatementComponent);
   }
 }
