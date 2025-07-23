@@ -33,8 +33,7 @@ export class MenubarComponent {
   isAuthenticated = signal(false);
   modalOpen = false;
 
-  constructor() {
-    effect(() => {
+  effect = effect(() => {
       const token = this.authStore.token();
       const isLoggedIn = !!token;
 
@@ -52,7 +51,6 @@ export class MenubarComponent {
         ? [{ label: 'Sair', icon: 'pi pi-sign-out', command: () => this.onLogout() }]
         : [{ label: 'Entrar', icon: 'pi pi-sign-in', command: () => this.openLogin() }];
     });
-  }
 
   onLogout() {
     this.authStore.clearToken();
