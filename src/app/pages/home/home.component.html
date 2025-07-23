@@ -1,82 +1,37 @@
-@if (isLoading) {
-  <ng-container>
-    <div class="animate-pulse flex flex-col md:flex-row">
-      <!-- Card de boas-vindas -->
-      <div class="flex flex-col w-full md:w-8/12 lg:w-8/12">
-        <div class="p-2">
-          <div class="p-4 bg-gray-200 rounded-lg shadow">
-            <div class="flex justify-between items-start">
-              <div class="h-6 bg-gray-300 rounded w-1/3"></div>
-              <div class="h-4 bg-gray-300 rounded w-1/6"></div>
-            </div>
-            <div class="mt-6">
-              <div class="flex items-center space-x-2">
-                <div class="h-3 bg-gray-300 rounded w-1/6"></div>
-                <div class="h-6 bg-gray-300 rounded w-6"></div>
-              </div>
-              <div class="mt-2 h-10 bg-gray-300 rounded w-1/2"></div>
-            </div>
-          </div>
+<div class="flex flex-col md:flex-row">
+  <div class="flex flex-col w-full md:w-8/12 lg:w-8/12">
+    <div class="flex-none p-2">
+      <div class="p-4 w-full bg-sky-200 rounded-lg shadow">
+        <div class="flex justify-between items-start">
+          <h1 class="text-xl font-semibold">Olá, {{ user }}!</h1>
+          <span class="text-sm">{{ dateToday | date: "dd/MM/yyyy" }}</span>
         </div>
-
-        <!-- Extrato -->
-        <div class="overflow-auto flex-1 p-2">
-          <div class="flex flex-col p-4 w-full h-full bg-gray-200 rounded-lg shadow space-y-4">
-            <div class="h-6 bg-gray-300 rounded w-1/4"></div>
-            <ng-container *ngFor="let i of [0, 1, 2, 3, 4]">
-              <div class="h-4 bg-gray-300 rounded w-full"></div>
-            </ng-container>
+        <div class="mt-6">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs uppercase">Saldo</span>
+            <button (click)="toggleVisibility = !toggleVisibility" aria-label="Toggle saldo">
+              <i [ngClass]="toggleVisibility ? 'pi pi-eye' : 'pi pi-eye-slash'"></i>
+            </button>
           </div>
-        </div>
-      </div>
-
-      <!-- Resumo -->
-      <aside class="md:w-4/12 lg:w-4/12 h-[calc(100vh-10rem)] w-full p-2 flex flex-col overflow-auto">
-        <div class="flex flex-col p-4 w-full bg-gray-200 rounded-lg shadow space-y-4">
-          <div class="h-6 bg-gray-300 rounded w-1/3"></div>
-          <ng-container *ngFor="let i of [0, 1, 2, 3]">
-            <div class="h-4 bg-gray-300 rounded w-full"></div>
-          </ng-container>
-        </div>
-      </aside>
-    </div>
-  </ng-container>
-} @else {
-  <div class="flex flex-col md:flex-row">
-    <div class="flex flex-col w-full md:w-8/12 lg:w-8/12">
-      <div class="flex-none p-2">
-        <div class="p-4 w-full bg-sky-200 rounded-lg shadow">
-          <div class="flex justify-between items-start">
-            <h1 class="text-xl font-semibold">Olá, {{ user }}!</h1>
-            <span class="text-sm">{{ dateToday | date: "dd/MM/yyyy" }}</span>
-          </div>
-          <div class="mt-6">
-            <div class="flex items-center space-x-2">
-              <span class="text-xs uppercase">Saldo</span>
-              <button (click)="toggleVisibility = !toggleVisibility" aria-label="Toggle saldo">
-                <i [ngClass]="toggleVisibility ? 'pi pi-eye' : 'pi pi-eye-slash'"></i>
-              </button>
-            </div>
-            <h2 class="mt-2 text-3xl font-bold">
-              {{ toggleVisibility ? (balance() | currency: "BRL" : "symbol" : "1.2-2") : "••••••••••••" }}
-            </h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="overflow-auto flex-1 p-2">
-        <div class="flex overflow-hidden flex-col p-4 w-full h-full bg-gray-100 rounded-lg shadow">
-          <h2 class="mb-4 text-xl font-semibold">Extrato</h2>
-          <app-statement-wrapper />
+          <h2 class="mt-2 text-3xl font-bold">
+            {{ toggleVisibility ? (balance() | currency: "BRL" : "symbol" : "1.2-2") : "••••••••••••" }}
+          </h2>
         </div>
       </div>
     </div>
 
-    <aside class="md:w-4/12 lg:w-4/12 h-[calc(100vh-10rem)] w-full p-2 flex flex-col overflow-auto">
-      <div class="flex overflow-auto flex-col p-4 w-full bg-gray-100 rounded-lg shadow">
-        <h2 class="mb-4 text-xl font-semibold">Resumo</h2>
-        <app-react-wrapper />
+    <div class="overflow-auto flex-1 p-2">
+      <div class="flex overflow-hidden flex-col p-4 w-full h-full bg-gray-100 rounded-lg shadow">
+        <h2 class="mb-4 text-xl font-semibold">Extrato</h2>
+        <app-statement-wrapper />
       </div>
-    </aside>
+    </div>
   </div>
-}
+
+  <aside class="md:w-4/12 lg:w-4/12 h-[calc(100vh-10rem)] w-full p-2 flex flex-col overflow-auto">
+    <div class="flex overflow-auto flex-col p-4 w-full bg-gray-100 rounded-lg shadow">
+      <h2 class="mb-4 text-xl font-semibold">Resumo</h2>
+      <app-react-wrapper />
+    </div>
+  </aside>
+</div>
