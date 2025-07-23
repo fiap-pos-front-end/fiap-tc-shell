@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from '@shell/core';
-import { MenubarComponent } from '@shell/core';
+import { FooterComponent, HeaderComponent } from '@shell/core';
 
 @Component({
   selector: 'app-blank',
   templateUrl: 'blank.component.html',
-  imports: [RouterOutlet, FooterComponent, MenubarComponent],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent],
 })
 export class BlankComponent {}

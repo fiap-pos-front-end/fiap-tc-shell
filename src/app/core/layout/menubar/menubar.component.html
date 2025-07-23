@@ -1,5 +1,8 @@
-<div class="mx-auto" [ngClass]="isAuthenticated() ? 'max-w-7xl' : 'w-full'">
+<div class="mx-auto max-w-7xl">
   <p-menubar [model]="menus">
+    <ng-template #start>
+      <img src="assets/logo/bytebank.svg" alt="bytebank" class="m-2 h-8 w-8 object-contain" />
+    </ng-template>
     <ng-template #item let-item>
       <a
         pRipple
@@ -19,15 +22,10 @@
           class="cursor-pointer"
           image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
           shape="circle"
-          (click)="isAuthenticated() ? logout.toggle($event) : openLogin()"
+          (click)="logout.toggle($event)"
         ></p-avatar>
-
-        <p-menu #logout [model]="logoutMenu" [popup]="true" />
+        <p-menu #logout (click)="onLogout()" [model]="logoutMenu" [popup]="true" />
       </div>
     </ng-template>
   </p-menubar>
 </div>
-
-@if (modalOpen) {
-  <app-login [context]="this" (close)="modalOpen = false" />
-}
