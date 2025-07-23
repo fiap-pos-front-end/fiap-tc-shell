@@ -34,6 +34,7 @@ export class MenubarComponent {
     { label: 'Início', routerLink: '/banking', icon: 'pi pi-home', routerLinkActiveOptions: { exact: true } },
     { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
     { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
+    { label: 'Sobre Nós', routerLink: '/sobre-nos', icon: 'pi pi-users' },
   ];
 
   onLogout() {

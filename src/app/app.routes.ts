@@ -48,6 +48,10 @@ export const routes: Routes = [
             exposedModule: './routes',
           }).then((m) => m.routes),
       },
+      {
+        path: 'sobre-nos',
+        loadComponent: () => import('./pages/about-us/about-us.component').then((m) => m.AboutUsComponent),
+      },
     ],
   },
   {

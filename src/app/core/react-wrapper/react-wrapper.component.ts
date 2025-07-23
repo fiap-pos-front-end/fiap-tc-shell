@@ -1,5 +1,5 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
   template: '<div id="react-container"></div>',
 })
 export class ReactWrapperComponent {
+  route = input<string>();
   async ngAfterViewInit() {
     const remoteModule = await loadRemoteModule({
       type: 'module',
@@ -14,6 +15,7 @@ export class ReactWrapperComponent {
       exposedModule: './mount',
     });
 
-    remoteModule.mount('react-container');
+    const inputRoute = this.route() ?? '';
+    remoteModule.mount('react-container', inputRoute);
   }
 }

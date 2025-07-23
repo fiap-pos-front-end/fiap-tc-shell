@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
-  isLoading = true;
   balance = signal(0);
 
   ngOnInit() {
