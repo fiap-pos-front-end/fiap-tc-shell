@@ -17,8 +17,7 @@
     "install:fiap-tc-api": "cd ../fiap-tc-api && npm i",
     "start:all": "concurrently \"npm run start:fiap-tc-react\" \"npm run start:fiap-tc-angular\" \"npm run start:fiap-tc-angular2\" \"npm run start:fiap-tc-api\" \"npm run start\"",
     "install:all": "concurrently \"npm run install:fiap-tc-react\" \"npm run install:fiap-tc-angular\" \"npm run install:fiap-tc-angular2\" \"npm run install:fiap-tc-api\" \"npm i\"",
-    "sync:all": "concurrently \"cd ../fiap-tc-angular && git pull\" \"cd ../fiap-tc-angular2 && git pull\" \"cd ../fiap-tc-react && git pull\" \"cd ../fiap-tc-shared && git pull\" \"cd ../fiap-tc-api && git pull\" \"cd ../fiap-tc-shell && git pull\"",
-    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
+    "sync:all": "concurrently \"cd ../fiap-tc-angular && git checkout main && git pull\" \"cd ../fiap-tc-angular2 && git checkout main && git pull\" \"cd ../fiap-tc-react && git checkout main && git pull\" \"cd ../fiap-tc-shared && git checkout main && git pull\" \"cd ../fiap-tc-api && git checkout main && git pull\" \"cd ../fiap-tc-shell && git checkout main && git pull\""
   },
   "private": true,
   "dependencies": {
