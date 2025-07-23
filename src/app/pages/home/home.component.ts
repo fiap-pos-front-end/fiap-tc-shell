@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
+import { EVENTS, onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { ReactWrapperComponent } from '@shell/core';
 import { StatementWrapperComponent } from '../../core/statement-wrapper/statement-wrapper.component';
 
@@ -21,6 +21,6 @@ export class HomeComponent implements OnInit {
   }
 
   initialLoading() {
-    onEvent('balance-updated', (balance) => this.balance.set(balance));
+    onEvent(EVENTS.BALANCE_UPDATED, (balance) => this.balance.set(balance));
   }
 }
