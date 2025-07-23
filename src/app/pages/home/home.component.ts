@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.initialLoading();
   }
+
   initialLoading() {
-    onEvent('totalBalanceChanged', (balance) => this.balance.set(balance));
+    onEvent('balance-updated', (balance) => this.balance.set(balance));
   }
 }
