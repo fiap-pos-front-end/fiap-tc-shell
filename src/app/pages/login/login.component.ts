@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleAuthResponse(res: AuthResponsePayload) {
     const token = res?.access_token;
     if (token) {
+      this.closeLogin();
       this.router.navigate(['/banking']);
       this.vps.scrollToPosition([0, 0]);
     }

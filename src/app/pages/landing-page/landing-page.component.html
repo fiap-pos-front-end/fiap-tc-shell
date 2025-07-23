@@ -1,7 +1,7 @@
 <main class="w-full flex flex-col justify-center items-center">
   <section class="w-full flex justify-center items-center">
     <p-galleria
-      [containerStyle]="{ 'background-color': '#030712' }"
+      [containerStyle]="{ 'background-color': '#030712', 'border-radius': '0px' }"
       [value]="images"
       [showThumbnails]="false"
       [numVisible]="5"
@@ -9,6 +9,7 @@
       [showIndicators]="true"
       [autoPlay]="true"
       [circular]="true"
+      styleClass="rounded-none"
     >
       <ng-template #item let-item>
         <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
@@ -164,10 +165,10 @@
     <p class="text-center text-lg font-semibold">
       Crie a sua conta e venha fazer parte de umas das instituições que mais vem crescendo nos últimos anos
     </p>
-    <p-button label="Fazer parte" styleClass="w-48 h-14 text-lg" (click)="openLogin()" />
+    <p-button label="Fazer parte" styleClass="w-60 h-14 text-lg" (click)="openLogin()" />
   </section>
 </main>
 
-<div *ngIf="modalOpen">
-  <app-login [context]="this"> </app-login>
-</div>
+@if (modalOpen) {
+  <app-login [context]="this" />
+}
