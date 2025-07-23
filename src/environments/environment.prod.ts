@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apiUrl: 'http://need-to-be-updated', // TODO: atualizar assim que fizermos o deploy na cloud
-  urlMfAngular: 'http://localhost/fiap-tc-angular/remoteEntry.js',
-  urlMfAngular2: 'http://localhost/fiap-tc-angular2/remoteEntry.js',
-  urlMfReact: 'http://localhost/fiap-tc-react/remoteEntry.js',
+  urlMfAngular: 'https://main.dfb4k5gye6ghy.amplifyapp.com/remoteEntry.js',
+  urlMfAngular2: 'https://main.d2365zv6s1p7nn.amplifyapp.com/remoteEntry.js',
+  urlMfReact: 'https://main.d197zuuniam3wp.amplifyapp.com/remoteEntry.js',
 };
