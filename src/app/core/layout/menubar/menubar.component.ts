@@ -34,23 +34,21 @@ export class MenubarComponent {
   modalOpen = false;
 
   effect = effect(() => {
-      const token = this.authStore.token();
-      const isLoggedIn = !!token;
+    const token = this.authStore.token();
+    const isLoggedIn = !!token;
 
-      this.isAuthenticated.set(isLoggedIn);
+    this.isAuthenticated.set(isLoggedIn);
 
-      this.menus = isLoggedIn
-        ? [
-            { label: 'Início', routerLink: '/home', icon: 'pi pi-home' },
-            { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
-            { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
-          ]
-        : [];
+    this.menus = isLoggedIn
+      ? [
+          { label: 'Início', routerLink: '/home', icon: 'pi pi-home' },
+          { label: 'Categorias', routerLink: '/categorias', icon: 'pi pi-tags' },
+          { label: 'Transferências', routerLink: '/transferencias', icon: 'pi pi-money-bill' },
+        ]
+      : [];
 
-      this.logoutMenu = isLoggedIn
-        ? [{ label: 'Sair', icon: 'pi pi-sign-out', command: () => this.onLogout() }]
-        : [{ label: 'Entrar', icon: 'pi pi-sign-in', command: () => this.openLogin() }];
-    });
+    this.logoutMenu = isLoggedIn ? [{ label: 'Sair', icon: 'pi pi-sign-out', command: () => this.onLogout() }] : [];
+  });
 
   onLogout() {
     this.authStore.clearToken();

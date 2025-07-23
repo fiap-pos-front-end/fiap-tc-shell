@@ -169,6 +169,6 @@
   </section>
 </main>
 
-<div *ngIf="modalOpen">
-  <app-login [context]="this"> </app-login>
-</div>
+@if (modalOpen) {
+  <app-login [context]="this" />
+}

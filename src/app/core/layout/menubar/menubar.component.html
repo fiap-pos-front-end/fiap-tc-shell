@@ -19,14 +19,15 @@
           class="cursor-pointer"
           image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
           shape="circle"
-          (click)="logout.toggle($event)"
+          (click)="isAuthenticated() ? logout.toggle($event) : openLogin()"
         ></p-avatar>
-        <p-menu #logout (click)="onLogout()" [model]="logoutMenu" [popup]="true" />
+
+        <p-menu #logout [model]="logoutMenu" [popup]="true" />
       </div>
     </ng-template>
   </p-menubar>
 </div>
 
-<div *ngIf="modalOpen">
+@if (modalOpen) {
   <app-login [context]="this" (close)="modalOpen = false" />
-</div>
+}
