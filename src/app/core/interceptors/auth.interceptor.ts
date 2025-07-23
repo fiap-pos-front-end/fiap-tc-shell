@@ -23,7 +23,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
     catchError((err) => {
       if (err.status === 401 || err.status === 403) {
         store.clearToken();
-        router.navigate(['/inicio']);
+        router.navigate(['/pagina-inicial']);
         return EMPTY;
       }
       return throwError(() => err);

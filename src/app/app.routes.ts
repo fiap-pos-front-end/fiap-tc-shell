@@ -8,7 +8,7 @@ import { FullComponent } from './core/layout/full/full.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'inicio',
+    redirectTo: 'pagina-inicial',
     pathMatch: 'full',
   },
   {
@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: BlankComponent,
     children: [
       {
-        path: 'inicio',
+        path: 'pagina-inicial',
         loadComponent: () => import('./pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
       },
     ],
@@ -27,7 +27,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       {
-        path: 'banking',
+        path: 'inicio',
         loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
@@ -56,6 +56,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'inicio',
+    redirectTo: 'pagina-inicial',
   },
 ];

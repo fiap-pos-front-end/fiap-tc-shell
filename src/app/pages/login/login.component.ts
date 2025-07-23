@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const token = res?.access_token;
     if (token) {
       this.closeLogin();
-      this.router.navigate(['/banking']);
+      this.router.navigate(['/inicio']);
       this.vps.scrollToPosition([0, 0]);
     }
   }

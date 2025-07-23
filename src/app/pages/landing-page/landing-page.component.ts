@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     const token = this.authStore.token();
     if (token?.trim()) {
-      this.router.navigate(['/banking']);
+      this.router.navigate(['/inicio']);
     }
     this.images = this.loginService.getImages();
   }
