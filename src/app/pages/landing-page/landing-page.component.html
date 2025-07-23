@@ -160,15 +160,4 @@
       </div>
     </div>
   </section>
-
-  <section class="w-full py-4 flex flex-col justify-center items-center gap-6">
-    <p class="text-center text-lg font-semibold">
-      Crie a sua conta e venha fazer parte de umas das instituições que mais vem crescendo nos últimos anos
-    </p>
-    <p-button label="Fazer parte" styleClass="w-60 h-14 text-lg" (click)="openLogin()" />
-  </section>
 </main>
-
-@if (modalOpen) {
-  <app-login [context]="this" />
-}
