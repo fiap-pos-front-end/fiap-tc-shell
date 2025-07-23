@@ -3,7 +3,11 @@
     <div class="flex-none p-2">
       <div class="p-4 w-full bg-sky-200 rounded-lg shadow">
         <div class="flex justify-between items-start">
-          <h1 class="text-xl font-semibold">Olá, {{ user }}!</h1>
+          @if (userEmail()) {
+            <h1 class="text-xl font-semibold">Olá, {{ userEmail() }}!</h1>
+          } @else {
+            <h1 class="text-xl font-semibold">Seja bem-vindo ao Bytebank!</h1>
+          }
           <span class="text-sm">{{ dateToday | date: "dd/MM/yyyy" }}</span>
         </div>
         <div class="mt-6">
