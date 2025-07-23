@@ -1,35 +1,42 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { User } from '../../models/user.model';
+import { AuthStore } from '../../store/auth/auth.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private readonly httpClient = inject(HttpClient);
+  private readonly authStore = inject(AuthStore);
 
   private readonly userBaseUrl = `${environment.apiUrl}/auth`;
 
-  createUser(username: string, email: string, password: string): Observable<AuthResponsePayload> {
-    return this.httpClient.post<AuthResponsePayload>(
-      `${this.userBaseUrl}/register`,
-      { email, password },
-      {
+  createUser(user: User): Observable<AuthResponsePayload> {
+    return this.httpClient
+      .post<AuthResponsePayload>(`${this.userBaseUrl}/register`, user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      },
-    );
+      })
+      .pipe(
+        tap((res) => {
+          if (res?.access_token) this.authStore.setToken(res.access_token);
+        }),
+      );
   }
 
-  authUser(email: string, password: string): Observable<AuthResponsePayload> {
-    return this.httpClient.post<AuthResponsePayload>(
-      `${this.userBaseUrl}/login`,
-      { email, password },
-      {
+  authUser(user: User): Observable<AuthResponsePayload> {
+    return this.httpClient
+      .post<AuthResponsePayload>(`${this.userBaseUrl}/login`, user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      },
-    );
+      })
+      .pipe(
+        tap((res) => {
+          if (res?.access_token) this.authStore.setToken(res.access_token);
+        }),
+      );
   }
 
   getUser(): Observable<unknown> {

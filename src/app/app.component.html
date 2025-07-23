@@ -1,17 +1,1 @@
-<div class="flex flex-col" [ngClass]="isAuthenticated() ? 'pt-3' : ''">
-  @if (isAuthenticated()) {
-    <app-menubar class="w-full" />
-  } @else {
-    <!-- <app-header></app-header> -->
-  }
-
-  <main class="flex-1 bg-slate-100" [ngClass]="mainClass">
-    <div class="mx-auto" [ngClass]="secondClass">
-      <router-outlet />
-    </div>
-  </main>
-
-  @if (!isAuthenticated()) {
-    <app-footer class="mx-auto w-full" />
-  }
-</div>
+<router-outlet />

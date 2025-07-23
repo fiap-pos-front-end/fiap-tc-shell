@@ -1,42 +1,57 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './pages/home/home.component';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { authGuard } from './guards/auth.guard';
+import { BlankComponent } from './core/layout/blank/blank.component';
+import { FullComponent } from './core/layout/full/full.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LandingPageComponent,
+    redirectTo: 'inicio',
+    pathMatch: 'full',
   },
   {
-    path: 'home',
-    canActivate: [authGuard],
-    component: HomeComponent,
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'inicio',
+        loadComponent: () => import('./pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
+      },
+    ],
   },
   {
-    path: 'transferencias',
+    path: '',
+    component: FullComponent,
     canActivate: [authGuard],
-    loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: environment.urlMfAngular,
-        exposedModule: './routes',
-      }).then((m) => m.routes),
-  },
-  {
-    path: 'categorias',
-    canActivate: [authGuard],
-    loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: environment.urlMfAngular2,
-        exposedModule: './routes',
-      }).then((m) => m.routes),
+    children: [
+      {
+        path: 'banking',
+        loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+      },
+      {
+        path: 'transferencias',
+        loadChildren: () =>
+          loadRemoteModule({
+            type: 'module',
+            remoteEntry: environment.urlMfAngular,
+            exposedModule: './routes',
+          }).then((m) => m.routes),
+      },
+      {
+        path: 'categorias',
+        loadChildren: () =>
+          loadRemoteModule({
+            type: 'module',
+            remoteEntry: environment.urlMfAngular2,
+            exposedModule: './routes',
+          }).then((m) => m.routes),
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'inicio',
   },
 ];

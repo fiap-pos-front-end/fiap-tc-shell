@@ -17,6 +17,7 @@
         "build": {
           "builder": "ngx-build-plus:browser",
           "options": {
+            "allowedCommonJsDependencies": ["@angular-architects/module-federation"],
             "outputPath": "dist/fiap-tc-shell",
             "index": "src/index.html",
             "polyfills": ["zone.js"],

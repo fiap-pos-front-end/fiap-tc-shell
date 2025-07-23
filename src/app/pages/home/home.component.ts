@@ -1,46 +1,26 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { EVENTS, TransactionDTO, getLastEvent } from '@fiap-pos-front-end/fiap-tc-shared';
+import { onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { ReactWrapperComponent } from '@shell/core';
-import { StatementComponent } from './statement/statement.component';
+import { StatementWrapperComponent } from '../../core/statement-wrapper/statement-wrapper.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactWrapperComponent, DatePipe, CommonModule, StatementComponent],
+  imports: [ReactWrapperComponent, DatePipe, CommonModule, StatementWrapperComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
+  // TODO: alterar nome do usuario, (split no email)
   user = 'Maria';
   dateToday = new Date();
   toggleVisibility = true;
-
+  isLoading = true;
   balance = signal(0);
-  transactions = signal<TransactionDTO[]>([]);
 
   ngOnInit() {
-    const transactionsReceived = getLastEvent(EVENTS.TRANSACTIONS_UPDATED);
-    this.transactions.set(this.mapTransactionsToViewModel(transactionsReceived));
-    this.balance.set(this.calculateBalance(this.transactions()));
+    this.initialLoading();
   }
-
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  private mapTransactionsToViewModel(transactions: any[]): TransactionDTO[] {
-    return (transactions || []).map((transaction) => ({
-      amount: transaction.amount.amount,
-      category: transaction.category,
-      date: new Date(transaction.date),
-      id: parseInt(transaction.id),
-      type: transaction.type,
-    }));
-  }
-
-  private calculateBalance(transactions: TransactionDTO[]): number {
-    return transactions.reduce((acc, transaction) => {
-      if (transaction.type === 'Receita') {
-        return acc + transaction.amount;
-      }
-
-      return acc - transaction.amount;
-    }, 0);
+  initialLoading() {
+    onEvent('totalBalanceChanged', (balance) => this.balance.set(balance));
   }
 }

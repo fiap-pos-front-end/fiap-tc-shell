@@ -6,7 +6,6 @@ import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { LoginService } from '../../shared/services/login/login.service';
-import { AuthStore } from '../../shared/store/auth/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -22,26 +21,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private vps = inject(ViewportScroller);
-  private readonly authStore = inject(AuthStore);
 
-  public isSignUpAtivo = false;
-  public loginForm!: FormGroup;
-  public registerForm!: FormGroup;
+  isSignUpAtivo = false;
+  form!: FormGroup;
 
   @Input() context!: { closeLogin: () => void };
 
   ngOnInit() {
     document.body.style.overflowY = 'hidden';
 
-    this.loginForm = this.fb.group({
+    this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
-    });
-
-    this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.required],
     });
   }
 
@@ -50,12 +41,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   authUser() {
-    if (!this.loginForm.valid) {
+    if (!this.form.valid) {
       this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
       return;
     }
 
-    this.loginService.authUser(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    this.loginService.authUser(this.form.value).subscribe({
       next: (res) => this.handleAuthResponse(res),
       error: () =>
         this.messageService.add({
@@ -68,14 +59,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   createUser() {
-    if (!this.registerForm.valid) {
+    if (!this.form.valid) {
       this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos', life: 2500 });
       return;
     }
 
-    const user = this.registerForm.value;
+    const user = this.form.value;
     if (this.loginService.emailValidator(user.email)) {
-      this.loginService.createUser(user.username, user.email, user.password).subscribe({
+      this.loginService.createUser(user).subscribe({
         next: (res) => this.handleAuthResponse(res),
         error: () =>
           this.messageService.add({
@@ -87,8 +78,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
     }
   }
-
   changeMode() {
+    this.form.reset();
     this.isSignUpAtivo = !this.isSignUpAtivo;
   }
 
@@ -99,8 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleAuthResponse(res: AuthResponsePayload) {
     const token = res?.access_token;
     if (token) {
-      this.authStore.setToken(token);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/banking']);
       this.vps.scrollToPosition([0, 0]);
     }
   }
