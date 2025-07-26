@@ -26,9 +26,7 @@ export class MenubarComponent {
 
   readonly logout = viewChild<Menu>('logout');
 
-  readonly logoutMenu: MenuItem[] = [
-    { label: 'Sair', routerLink: '/', icon: 'pi pi-sign-out', command: () => this.onLogout() },
-  ];
+  readonly logoutMenu: MenuItem[] = [{ label: 'Sair', icon: 'pi pi-sign-out', command: () => this.onLogout() }];
 
   readonly menus: MenuItem[] = [
     { label: 'Início', routerLink: '/banking', icon: 'pi pi-home', routerLinkActiveOptions: { exact: true } },
