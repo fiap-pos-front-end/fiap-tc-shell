@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
+import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { User } from '../../models/user.model';
@@ -15,9 +15,9 @@ export class LoginService {
 
   private readonly userBaseUrl = `${environment.apiUrl}/auth`;
 
-  createUser(user: User): Observable<AuthResponsePayload> {
+  createUser(user: User): Observable<AuthResponse> {
     return this.httpClient
-      .post<AuthResponsePayload>(`${this.userBaseUrl}/register`, user, {
+      .post<AuthResponse>(`${this.userBaseUrl}/register`, user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })
       .pipe(
@@ -27,9 +27,9 @@ export class LoginService {
       );
   }
 
-  authUser(user: User): Observable<AuthResponsePayload> {
+  authUser(user: User): Observable<AuthResponse> {
     return this.httpClient
-      .post<AuthResponsePayload>(`${this.userBaseUrl}/login`, user, {
+      .post<AuthResponse>(`${this.userBaseUrl}/login`, user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })
       .pipe(

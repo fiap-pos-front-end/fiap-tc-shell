@@ -2,7 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthResponsePayload } from '@fiap-pos-front-end/fiap-tc-shared';
+import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { LoginService } from '../../shared/services/login/login.service';
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.context.closeLogin();
   }
 
-  private handleAuthResponse(res: AuthResponsePayload) {
+  private handleAuthResponse(res: AuthResponse) {
     const token = res?.access_token;
     if (token) {
       this.closeLogin();
