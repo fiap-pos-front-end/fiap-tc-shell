@@ -4,6 +4,6 @@ import { ReactWrapperComponent } from '@shell/core';
 @Component({
   selector: 'app-about-us',
   imports: [ReactWrapperComponent],
-  template: `<app-react-wrapper [route]="'/sobre-nos'" />`,
+  template: `<app-react-wrapper [route]="'/about-us'" />`,
 })
 export class AboutUsComponent {}

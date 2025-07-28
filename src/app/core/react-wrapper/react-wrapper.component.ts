@@ -10,12 +10,13 @@ export class ReactWrapperComponent {
   route = input<string>();
   async ngAfterViewInit() {
     const remoteModule = await loadRemoteModule({
-      type: 'module',
+      type: 'script',
       remoteEntry: environment.urlMfReact,
+      remoteName: 'mfereact',
       exposedModule: './mount',
     });
 
-    const inputRoute = this.route() ?? '';
+    const inputRoute = this.route() ?? '/';
     remoteModule.mount('react-container', inputRoute);
   }
 }
