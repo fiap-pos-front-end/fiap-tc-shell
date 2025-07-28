@@ -12,19 +12,15 @@
         class="flex items-center p-menubar-item-link"
       >
         <span><i [class]="item.icon + ' mr-2'"></i> {{ item.label }}</span>
-        <i *ngIf="item.items" class="ml-auto pi pi-angle-down"></i>
+        @if (item.items) {
+          <i class="ml-auto pi pi-angle-down"></i>
+        }
       </a>
     </ng-template>
 
     <ng-template #end>
       <div class="flex items-center space-x-3">
-        <p-avatar
-          class="cursor-pointer"
-          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-          shape="circle"
-          (click)="logout.toggle($event)"
-        ></p-avatar>
-        <p-menu #logout (click)="onLogout()" [model]="logoutMenu" [popup]="true" />
+        <p-button label="Sair" icon="pi pi-sign-out" variant="text" (click)="onLogout()" severity="secondary" />
       </div>
     </ng-template>
   </p-menubar>
