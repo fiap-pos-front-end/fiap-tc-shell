@@ -1,11 +1,12 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { LoginService } from '../../shared/services/login/login.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import { LoginService } from '../../shared/services/login/login.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private readonly destroyRef = inject(DestroyRef);
   private messageService = inject(MessageService);
   private loginService = inject(LoginService);
   private fb = inject(FormBuilder);
@@ -46,16 +48,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.loginService.authUser(this.form.value).subscribe({
-      next: (res) => this.handleAuthResponse(res),
-      error: () =>
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: 'Não foi possível autenticar o usuário!',
-          life: 2500,
-        }),
-    });
+    this.loginService
+      .authUser(this.form.value)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => this.handleAuthResponse(res),
+        error: () =>
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Não foi possível autenticar o usuário!',
+            life: 2500,
+          }),
+      });
   }
 
   createUser() {
@@ -66,16 +71,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const user = this.form.value;
     if (this.loginService.emailValidator(user.email)) {
-      this.loginService.createUser(user).subscribe({
-        next: (res) => this.handleAuthResponse(res),
-        error: () =>
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erro',
-            detail: 'Não foi possível criar o usuário',
-            life: 2500,
-          }),
-      });
+      this.loginService
+        .createUser(user)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (res) => this.handleAuthResponse(res),
+          error: () =>
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Não foi possível criar o usuário',
+              life: 2500,
+            }),
+        });
     }
   }
   changeMode() {
