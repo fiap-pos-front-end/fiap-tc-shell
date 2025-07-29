@@ -1,24 +1,54 @@
-# Fiap Tech Challenge Shell
+# Fiap Tech Challenge Shell - HOST
 
-Projeto shell para Microfrontends Fiap Tech Challenge. Reúne front-ends React (Charts), Angular (Transações), Angular2 (Categorias) e API.
+**Projeto shell para controle e host dos Microfrontends do desafio Fiap Tech Challenge. Reúne front-ends React (Charts), Angular (Transações), Angular2 (Categorias) e API.**
 
-## Pré-requisitos
+---
+## 🚀 Primeiros passos
+### Pré-requisitos
 
-- Node.js >= 18
-- Angular CLI >= 15
+- Node.js (versão 18 ou superior)
+- NPM (versão 9 ou superior)
+- Angular CLI v19
 
-## Estrutura do Repositório
+## 🧱 Estrutura do Projeto
 
-- **/src**: Código do shell Angular
+```
+src/
+├── app/
+│   ├── core/                    # -- Funcionalidades essenciais da aplicação
+│   │   ├── interceptors/        # Interceptor de requisiçoes HTTP
+│   │   └── layout/              # Modelos e regras de negócio
+│   │   └── react_wrapper/       # Wrapper responsável por receber e renderizar o MF REACT
+│   ├── guards/                  # Contém o AuthGuard para bloquear acesso não autenticado as rotas
+│   └── pages/                   # Componentes de página 
+|   └── shared/                  # -- Arquivos compartilhados por toda aplicação
+|         └── models             # Principais Modelos
+|         └── services           # Services de todo repositório
+|         └── store              # Estrutura responsável pelo token (Armazenamento, Limpeza do token, Decode, etc)
+├── environments/                # Configurações de ambiente
+└── assets/                      # Recursos estáticos
+```
 
-### Repositórios separados
+### Instalação
+1. Clone o repositório:
 
-- **../fiap-tc-react**: MFE React
-- **../fiap-tc-angular**: MFE Angular
-- **../fiap-tc-angular2**: MFE Angular2
-- **../fiap-tc-api**: Backend API
+```bash
+git clone [url-do-repositorio]
+```
 
-## Instalação
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
+
+```bash
+npm start
+```
+
+Pronto! O shell estará pronto para fazer o seu papel de orquestrador. Preparamos alguns scripts que irão facilitar para manter os demais repositorios atualizados e funcionando. Basta rodar os comandos a partir da pasta fiap-tc-shell
 
 ### Instala todas as dependências de uma só vez:
 
@@ -36,8 +66,6 @@ npm run install:fiap-tc-api
 npm i
 ```
 
-## Execução
-
 ### Inicia apenas o shell Angular:
 
 ```bash
@@ -50,12 +78,24 @@ npm run start
 npm run start:all
 ```
 
-## Scripts Úteis
+### Realiza o git pull em todos os repositórios (React, Angular, Angular2, API e shell):
 
-- `npm run build` — Compila o shell Angular para produção
-- `npm run watch` — Compilação em modo observação (dev)
-- `npm run test` — Executa testes
-- `npm run run:all` — Inicializa o servidor de desenvolvimento de MFEs federados
+```bash
+npm run sync:all
+```
+
+### Conceitos Utilizados
+
+1. **Module Federation**
+- Permite o carregamento dinâmico de microfrontends, facilitando o compartilhamento de funcionalidades entre múltiplas aplicações.
+- Neste projeto, foi utilizada a integração entre múltiplas stacks (Angular e React).
+
+2. **Auth Guard**
+- Protege rotas da aplicação, permitindo acesso apenas a usuários autenticados.
+- Redireciona para login quando necessário.
+
+3. **Interceptor**
+- Intercepta requisições HTTP para anexar o token de autenticação e tratar erros globais como 401 ou 403.
 
 ## Observações
 
