@@ -1,9 +1,21 @@
-FROM node:lts-alpine AS build
-WORKDIR /app
-COPY . .
-RUN npm install && npm run build
+FROM node:lts-alpine
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY ../nginx.conf /etc/nginx/nginx.conf
+WORKDIR /app
+
+ARG NPM_TOKEN
+ENV NPM_TOKEN=${NPM_TOKEN}
+
+RUN echo "@fiap-pos-front-end:registry=https://npm.pkg.github.com" > .npmrc \
+  && echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> .npmrc
+
+COPY . .
+RUN npm ci
+
+RUN rm .npmrc
+
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=0 /app/dist/fiap-tc-shell /usr/share/nginx/html
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
