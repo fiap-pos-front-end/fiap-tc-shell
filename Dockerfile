@@ -16,7 +16,6 @@ RUN rm .npmrc
 RUN npm run build
 
 FROM nginx:stable-alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=0 /app/dist/fiap-tc-shell /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
