@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
+import { Button } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { Ripple } from 'primeng/ripple';
 import { AuthStore } from '../../../shared/store/auth/auth.store';
-import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-menubar',

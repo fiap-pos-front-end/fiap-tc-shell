@@ -1,9 +1,8 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { EVENTS, onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
-import { ReactWrapperComponent } from '@shell/core';
-import { StatementWrapperComponent } from '../../core/statement-wrapper/statement-wrapper.component';
-import { AuthStore } from '../../shared/store/auth/auth.store';
+import { ReactWrapperComponent, StatementWrapperComponent } from '@shell/presentation';
+import { AuthStore } from '@shell/shared/store/auth/auth.store';
 
 @Component({
   selector: 'app-home',

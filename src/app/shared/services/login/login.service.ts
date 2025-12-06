@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
+import { User } from '@shell/domain';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../models/user.model';
 import { AuthStore } from '../../store/auth/auth.store';
 
 @Injectable({

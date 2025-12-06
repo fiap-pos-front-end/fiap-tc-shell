@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenubarComponent } from '@shell/core';
+import { MenubarComponent } from '../menubar/menubar.component';
 
 @Component({
   selector: 'app-full',

@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { News } from '@shell/domain';
+import { LandingPageService } from '@shell/shared/services/landing-page/landing-page.service';
+import { AuthStore } from '@shell/shared/store/auth/auth.store';
 import { ButtonModule } from 'primeng/button';
 import { GalleriaModule } from 'primeng/galleria';
-import { News } from '../../shared/models/news.model';
-import { LandingPageService } from '../../shared/services/landing-page/landing-page.service';
-import { Router } from '@angular/router';
-import { AuthStore } from '../../shared/store/auth/auth.store';
+
 @Component({
   selector: 'app-landing-page',
   imports: [GalleriaModule, ButtonModule],

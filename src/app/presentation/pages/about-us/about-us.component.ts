@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactWrapperComponent } from '@shell/core';
+import { ReactWrapperComponent } from '@shell/presentation';
 
 @Component({
   selector: 'app-about-us',

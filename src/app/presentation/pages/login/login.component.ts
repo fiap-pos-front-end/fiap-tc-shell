@@ -1,12 +1,12 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, DestroyRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
+import { LoginService } from '@shell/shared/services/login/login.service';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
-import { LoginService } from '../../shared/services/login/login.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',

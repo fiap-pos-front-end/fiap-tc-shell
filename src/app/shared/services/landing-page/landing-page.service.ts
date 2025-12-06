@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { News } from '@shell/domain';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LandingPageService {
-  getImages() {
+  getImages(): News[] {
     return [
       {
         itemImageSrc: 'assets/images/gallery/banner_1.png',

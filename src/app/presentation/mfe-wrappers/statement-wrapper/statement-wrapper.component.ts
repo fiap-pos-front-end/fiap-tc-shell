@@ -1,6 +1,6 @@
-import { Component, ViewContainerRef, OnInit, ViewChild } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from '../../../environments/environment';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-statement-wrapper',
