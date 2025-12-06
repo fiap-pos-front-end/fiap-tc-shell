@@ -1,8 +1,8 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
 import { BlankComponent, FullComponent } from '@shell/presentation';
+import { authGuard } from '@shell/presentation/guards/auth.guard';
 import { environment } from '../environments/environment';
-import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {

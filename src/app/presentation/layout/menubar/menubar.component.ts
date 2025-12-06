@@ -6,7 +6,7 @@ import { Button } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { Ripple } from 'primeng/ripple';
-import { AuthStore } from '../../../shared/store/auth/auth.store';
+import { AuthStore } from '../../state/auth/auth.store';
 
 @Component({
   selector: 'app-menubar',

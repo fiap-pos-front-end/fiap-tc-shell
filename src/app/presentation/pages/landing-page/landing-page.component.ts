@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { News } from '@shell/domain';
-import { AuthStore } from '@shell/shared/store/auth/auth.store';
 import { ButtonModule } from 'primeng/button';
 import { GalleriaModule } from 'primeng/galleria';
+import { AuthStore } from '../../state/auth/auth.store';
 
 @Component({
   selector: 'app-landing-page',

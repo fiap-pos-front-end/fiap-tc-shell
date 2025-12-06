@@ -7,11 +7,6 @@ export class AuthUserUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
   execute(user: User): Observable<AuthResponse> {
-    const response = this.authRepository.authUser(user);
-    if (response) {
-      // if (res?.access_token) this.authStore.setToken(res.access_token);
-    }
-
-    return response;
+    return this.authRepository.authUser(user);
   }
 }

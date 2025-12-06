@@ -6,10 +6,10 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import Aura from '@primeng/themes/aura';
+import { authInterceptor } from '@shell/infra/interceptors/auth.interceptor';
 import pt from 'primelocale/pt-BR.json';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {

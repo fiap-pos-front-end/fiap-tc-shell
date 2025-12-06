@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { EVENTS, onEvent } from '@fiap-pos-front-end/fiap-tc-shared';
 import { ReactWrapperComponent, StatementWrapperComponent } from '@shell/presentation';
-import { AuthStore } from '@shell/shared/store/auth/auth.store';
+import { AuthStore } from '../../state/auth/auth.store';
 
 @Component({
   selector: 'app-home',

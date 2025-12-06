@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { AuthResponse } from '@fiap-pos-front-end/fiap-tc-shared';
 import { AuthUserUseCase, CreateUserUseCase } from '@shell/domain';
+import { AuthStore } from '../../state/auth/auth.store';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly messageService = inject(MessageService);
 
+  private readonly authStore = inject(AuthStore);
   private readonly authUserUseCase = inject(AuthUserUseCase);
   private readonly createUserUseCase = inject(CreateUserUseCase);
 
@@ -99,6 +101,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleAuthResponse(res: AuthResponse) {
     const token = res?.access_token;
     if (token) {
+      this.authStore.setToken(token);
       this.closeLogin();
       this.router.navigate(['/banking']);
       this.vps.scrollToPosition([0, 0]);
