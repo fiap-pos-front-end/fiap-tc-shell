@@ -97,6 +97,9 @@ npm run sync:all
 3. **Interceptor**
 - Intercepta requisições HTTP para anexar o token de autenticação e tratar erros globais como 401 ou 403.
 
+4. **Cache**
+- Versionamento do remoteEntry.js para lidar da melhor maneira com o cache da aplicação
+
 ## Observações
 
 - Verifique versões de Node e Angular CLI se algo quebrar.
