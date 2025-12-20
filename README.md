@@ -98,7 +98,7 @@ npm run sync:all
 - Intercepta requisições HTTP para anexar o token de autenticação e tratar erros globais como 401 ou 403.
 
 4. **Cache**
-- Versionamento do remoteEntry.js para lidar da melhor maneira com o cache da aplicação
+- Utilização de versionamento no remoteEntry.js como estratégia de controle de cache, garantindo carregamento consistente dos microfrontends e prevenindo problemas decorrentes de cache inválido.
 
 ## Observações
 
