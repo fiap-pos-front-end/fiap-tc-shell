@@ -1,9 +1,8 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes } from '@angular/router';
+import { BlankComponent, FullComponent } from '@shell/presentation';
+import { authGuard } from '@shell/presentation/guards/auth.guard';
 import { environment } from '../environments/environment';
-import { authGuard } from './guards/auth.guard';
-import { BlankComponent } from './core/layout/blank/blank.component';
-import { FullComponent } from './core/layout/full/full.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +16,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'inicio',
-        loadComponent: () => import('./pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
+        loadComponent: () =>
+          import('./presentation/pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
       },
     ],
   },
@@ -28,7 +28,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'banking',
-        loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+        loadComponent: () => import('./presentation/pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
         path: 'transferencias',
@@ -50,7 +50,7 @@ export const routes: Routes = [
       },
       {
         path: 'sobre-nos',
-        loadComponent: () => import('./pages/about-us/about-us.component').then((m) => m.AboutUsComponent),
+        loadComponent: () => import('./presentation/pages/about-us/about-us.component').then((m) => m.AboutUsComponent),
       },
     ],
   },
